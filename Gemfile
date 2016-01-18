@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+ruby "2.3.0"
 
 gem "rails", "~> 4.2.0"
 gem "pg"
@@ -30,9 +31,9 @@ group :development, :test do
   # gem "jazz_hands"
 end
 
-# group :production do
-#   gem "rails_12factor"
-# end
+group :production do
+  gem "rails_12factor"
+end
 
 # gem "responders"
 
