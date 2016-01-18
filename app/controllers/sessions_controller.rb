@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
 
   def sign_up
     run Session::SignUp do |op|
-      flash[:notice] = "Please log in now!"
-      return redirect_to sessions_sign_in_form_path
+      tyrant.sign_in!(op.model)
+      return redirect_to root_path
     end
 
     render action: :sign_up_form
