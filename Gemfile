@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem "rails", "~> 4.2.0"
-gem "sqlite3"
+gem "pg"
 gem "jquery-rails"
 gem "foundation-rails", "~> 6.1.1.1"
 gem "haml-rails"
@@ -30,15 +30,10 @@ group :development, :test do
   # gem "jazz_hands"
 end
 
-group :test do
-  gem "memory_test_fix"
-end
-
 # group :production do
 #   gem "rails_12factor"
 # end
 
-# gem "pg"
 # gem "responders"
 
 gem "representable", "2.4.0"
