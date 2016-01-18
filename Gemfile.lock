@@ -83,6 +83,8 @@ GEM
       declarative (~> 0.0.4)
       representable (>= 2.4.0, <= 3.1.0)
       uber
+    email_validator (1.6.0)
+      activemodel
     equalizer (0.0.11)
     erubis (2.7.0)
     eventmachine (1.0.9.1)
@@ -229,9 +231,9 @@ GEM
       reform (>= 2.0.0, < 3.0.0)
       uber (>= 0.0.15)
     trailblazer-loader (0.0.7)
-    trailblazer-rails (0.2.3)
+    trailblazer-rails (0.2.4)
       trailblazer (>= 1.0.4)
-      trailblazer-loader (>= 0.0.4)
+      trailblazer-loader (>= 0.0.7)
     tyrant (0.0.3)
       bcrypt
       disposable (>= 0.1.11)
@@ -264,6 +266,7 @@ DEPENDENCIES
   cells-haml (= 0.0.8)
   coffee-rails (~> 4.1.0)
   disposable (>= 0.2.1)
+  email_validator
   foundation-icons-sass-rails
   foundation-rails (~> 6.1.1.1)
   haml-rails

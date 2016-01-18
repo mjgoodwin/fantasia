@@ -62,6 +62,6 @@ gem "roar", "1.0.2"
 # gem "pundit"
 
 # gem "rails-timeago"
-# gem "email_validator"
+gem 'email_validator', require: 'email_validator/strict'
 
 gem "foundation-icons-sass-rails"
