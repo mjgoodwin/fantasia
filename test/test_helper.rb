@@ -5,6 +5,9 @@ require 'rails/test_help'
 require "minitest/autorun"
 require "trailblazer/rails/test/integration"
 
+require "minitest/reporters"
+Minitest::Reporters.use! [Minitest::Reporters::ProgressReporter.new]#, Minitest::Reporters::MeanTimeReporter.new]
+
 Rails.backtrace_cleaner.remove_silencers!
 
 Minitest::Spec.class_eval do

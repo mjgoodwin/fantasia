@@ -25,10 +25,14 @@ group :development do
 end
 
 group :development, :test do
-  gem "minitest-rails-capybara"
-  gem "minitest-line"
   gem 'pry-byebug'
-  # gem "jazz_hands"
+end
+
+group :test do
+  gem "minitest"
+  gem "minitest-rails-capybara"
+  gem "minitest-reporters"
+  gem 'm', "~> 1.3.1"
 end
 
 group :production do
