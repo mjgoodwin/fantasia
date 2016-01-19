@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# After merge, run the copy script to update all local githooks
+./githooks/copy
+echo "Copied all githooks into .git/hooks"
+

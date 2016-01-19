@@ -40,18 +40,6 @@ module Session
     contract do
       validates :email, email: true, unique: true
     end
-
-    # class Admin < self
-    #   self.contract_class = Class.new(Reform::Form)
-    #   contract do
-    #     property :email
-    #     property :password, virtual: true
-    #     property :password_digest
-
-    #     def password_ok?(*)
-    #     end
-    #   end
-    # end
   end
 
   # class ChangePassword < Trailblazer::Operation # WakeUp

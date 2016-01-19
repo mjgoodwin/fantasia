@@ -58,20 +58,3 @@ class SessionSignUpTest < MiniTest::Spec
     op.errors.to_s.must_equal "{:email=>[\"has already been taken\"]}"
   end
 end
-
-
-# this happens when you add a NEW user to a thing.
-class SessionSignUpUnconfirmedNeedsPasswordTest < MiniTest::Spec
-  it do
-    user = User.new( {email: "selectport@trb.org" })
-
-    res, op = Session::SignUp::UnconfirmedNoPassword.run(user: user)
-
-    res.must_equal true
-
-    # user = op.model
-    user.email.must_equal "selectport@trb.org"
-
-    Tyrant::Authenticatable.new(user).confirmable?.must_equal true
-  end
-end

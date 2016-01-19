@@ -22,17 +22,19 @@ group :development do
   gem "rails_layout"
   gem "better_errors"
   gem "rack-mini-profiler"
-end
-
-group :development, :test do
-  gem 'pry-byebug'
+  gem "guard"
+  gem "guard-minitest"
 end
 
 group :test do
-  gem "minitest"
   gem "minitest-rails-capybara"
   gem "minitest-reporters"
-  gem 'm', "~> 1.3.1"
+  gem "m", "~> 1.3.1"
+end
+
+group :development, :test do
+  gem "pry-byebug"
+  # gem "minitest"
 end
 
 group :production do
@@ -62,6 +64,6 @@ gem "roar", "1.0.2"
 # gem "pundit"
 
 # gem "rails-timeago"
-gem 'email_validator', require: 'email_validator/strict'
+gem "email_validator", require: "email_validator/strict"
 
 gem "foundation-icons-sass-rails"

@@ -6,7 +6,11 @@ require "minitest/autorun"
 require "trailblazer/rails/test/integration"
 
 require "minitest/reporters"
-Minitest::Reporters.use! [Minitest::Reporters::ProgressReporter.new]#, Minitest::Reporters::MeanTimeReporter.new]
+# Minitest::Reporters.use! [Minitest::Reporters::ProgressReporter.new]#, Minitest::Reporters::MeanTimeReporter.new]
+Minitest::Reporters.use!(
+  Minitest::Reporters::ProgressReporter.new,
+  ENV,
+  Minitest.backtrace_filter)
 
 Rails.backtrace_cleaner.remove_silencers!
 
@@ -33,7 +37,7 @@ Trailblazer::Test::Integration.class_eval do
   end
 
   def sign_up!(email="fred@trb.org", password="123456")
-    Session::SignUp::Admin.(user: {email: email, password: password})
+    Session::SignUp.(user: {email: email, password: password, confirm_password: password})
   end
 
   def submit!(email, password)

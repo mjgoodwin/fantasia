@@ -1,0 +1,34 @@
+#!/bin/sh
+#
+# A script for copying all hook files into local .git/hooks. Add any new hooks to this githooks directory
+# and notify people to run this script when new hooks are added. Script can be run form project folder or githooks directory.
+#
+# For information on git hooks please consult your local internet.
+#
+# Current hooks in place:
+#
+# pre-commit
+#   checks for any unresolved merge conflicts before commiting. Denies any commit if merge conflicts are unresolved.
+exec 1>&2
+
+PROJECT_FOLDER="githooks"
+PWD=`pwd`
+DIR=`basename $PWD`
+
+if [ $DIR != $PROJECT_FOLDER ]; then
+  if [ $DIR == "fantasia" ]; then
+    cd githooks
+  else
+    echo "EXITED: Please ensure you are in directories fantasia or githooks before running script"
+    exit 1
+  fi
+fi
+
+for file in *
+do
+  # ignore yourself
+  if [ $file == "copy" ]; then
+    continue
+  fi
+  cp $file ../.git/hooks
+done

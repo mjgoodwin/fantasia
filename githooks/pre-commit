@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# A hook that runs before a commit and checks if there are any unresolved merged
+# conflicts. It will reject the commit if any files contain the CULPRIT_STRING that
+# prefixes merge conflict code. It does not search in any of the directories
+# specified by .gitignore
+#
+
+# redirect output to stderr
+exec 1>&2
+
+FILENAMES=`git diff --staged --name-only --diff-filter=ACMR`
+
+# include the whitespace char after pry so that the pattern doesn't match itself
+echo $FILENAMES | xargs awk '/(binding\.pry|^<<<<<<<|^>>>>>>>|^=======$)/ { exit 1 }'
+if [ $? -ne "0" ]; then
+  echo "\n COMMIT REJECTED \n"
+  echo "You have either leftover merge conflict markers or have pry statements in your code."
+  echo "Please check your staged diff and resolve or remove them before commiting.\n"
+  exit 1
+fi
