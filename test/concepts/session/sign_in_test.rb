@@ -4,11 +4,11 @@ class SessionSignInTest < MiniTest::Spec
   # successful.
   it do
     sign_in_op = Session::SignUp.(user: {
-      email: "selectport@trb.org", password: "123123", confirm_password: "123123",
+      email: "mike@example.com", password: "123123", confirm_password: "123123",
     })
 
     res, op = Session::SignIn.run(session: {
-      email: "selectport@trb.org",
+      email: "mike@example.com",
       password: "123123"
     })
 
@@ -18,11 +18,11 @@ class SessionSignInTest < MiniTest::Spec
   # wrong password.
   it do
     sign_in_op = Session::SignUp.(user: {
-      email: "selectport@trb.org", password: "123123", confirm_password: "123123",
+      email: "mike@example.com", password: "123123", confirm_password: "123123",
     })
 
     res, op = Session::SignIn.run(session: {
-      email: "selectport@trb.org",
+      email: "mike@example.com",
       password: "wrong"
     })
 
@@ -39,7 +39,4 @@ class SessionSignInTest < MiniTest::Spec
 
     res.must_equal false
   end
-
-  # 3x wrong password in 10 mins.
-  # sign in when already signed in.
 end
