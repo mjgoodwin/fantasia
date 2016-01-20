@@ -24,6 +24,7 @@ group :development do
   gem "rack-mini-profiler"
   gem "guard"
   gem "guard-minitest"
+  gem "rails_real_favicon"
 end
 
 group :test do
