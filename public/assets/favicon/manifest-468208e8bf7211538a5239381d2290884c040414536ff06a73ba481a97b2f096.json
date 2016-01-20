@@ -1,0 +1,41 @@
+{
+	"name": "Fantasia",
+	"icons": [
+		{
+			"src": "/assets/favicon/android-chrome-36x36-dc50c5ca1008e1a224b8d6af8ec248a0b727f8ece6dd404c215094b171d0f1b5.png",
+			"sizes": "36x36",
+			"type": "image\/png",
+			"density": 0.75
+		},
+		{
+			"src": "/assets/favicon/android-chrome-48x48-99ced60de684e3fc831579c11d3edd4381eb5a2a2858cf2937f0fd00592a5624.png",
+			"sizes": "48x48",
+			"type": "image\/png",
+			"density": 1
+		},
+		{
+			"src": "/assets/favicon/android-chrome-72x72-bd21a015047bfd16135640ee16b2d528a71ac84c31eb8246d5f508ca15b612ba.png",
+			"sizes": "72x72",
+			"type": "image\/png",
+			"density": 1.5
+		},
+		{
+			"src": "/assets/favicon/android-chrome-96x96-af986ba837429dbdee2c021fc1b80ce8b3e4c655e4da56164a1ffadb26f6c38e.png",
+			"sizes": "96x96",
+			"type": "image\/png",
+			"density": 2
+		},
+		{
+			"src": "/assets/favicon/android-chrome-144x144-6cddb7b68b970c0f1f0aea022053d8faaab083a917ddab6f4d7594454493793f.png",
+			"sizes": "144x144",
+			"type": "image\/png",
+			"density": 3
+		},
+		{
+			"src": "/assets/favicon/android-chrome-192x192-2d0dda02f33e03c8729c19f317df1aab2024d270db8236df47a11e81446f7c3b.png",
+			"sizes": "192x192",
+			"type": "image\/png",
+			"density": 4
+		}
+	]
+}
