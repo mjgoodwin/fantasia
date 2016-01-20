@@ -28,7 +28,7 @@ Cell::TestCase.class_eval do
 end
 
 Trailblazer::Test::Integration.class_eval do
-  def sign_in!(email="fred@trb.org", password="123456")
+  def sign_in!(email="mike@example.com", password="123456")
     sign_up!(email, password) #=> Session::SignUp
 
     visit "/sessions/sign_in_form"
@@ -36,7 +36,7 @@ Trailblazer::Test::Integration.class_eval do
     submit!(email, password)
   end
 
-  def sign_up!(email="fred@trb.org", password="123456")
+  def sign_up!(email="mike@example.com", password="123456")
     Session::SignUp.(user: {email: email, password: password, confirm_password: password})
   end
 

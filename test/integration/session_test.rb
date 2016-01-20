@@ -27,13 +27,13 @@ class SessionIntegrationTest < Trailblazer::Test::Integration
     page.must_have_css "#user_email" # value?
 
     # password mismatch.
-    submit_sign_up!("Scharrels@trb.org", "123", "321")
+    submit_sign_up!("mike@example.com", "123", "321")
     page.must_have_css "#user_email" # value?
 
-    submit_sign_up!("Scharrels@trb.org", "123", "123")
-    page.must_have_css "#session_email"
-    page.must_have_css "#session_password"
-
+    # successful sign up and redirect
+    submit_sign_up!("mike@example.com", "123", "123")
+    page.current_path.must_equal "/"
+    page.must_have_content "Hi, mike@example.com"
   end
 
   # wrong login.
@@ -43,7 +43,8 @@ class SessionIntegrationTest < Trailblazer::Test::Integration
     page.must_have_css "#session_email"
     page.must_have_css "#session_password"
 
-    submit! "vladimir@horowitz.ru", "forgot"
+    # incorrect password
+    submit! "mike@example.com", "wrong"
 
     # login form is present, again.
     page.must_have_css "#session_email"
@@ -60,31 +61,30 @@ class SessionIntegrationTest < Trailblazer::Test::Integration
   # sucessful session.
   it do
     visit "sessions/sign_up_form"
-    submit_sign_up!("fred@trb.org", "123", "123")
-    submit!("fred@trb.org", "123")
+    submit_sign_up!("mike@example.com", "123", "123")
 
-    page.must_have_content "Hi, fred@trb.org" # login success.
+    page.must_have_content "Hi, mike@example.com" # login success.
 
     # no sign_in screen for logged in.
     visit "/sessions/sign_in_form"
-    page.must_have_content "Welcome to Gemgem!"
+    page.must_have_content "Welcome to Fantasia!"
 
     # no sign_up screen for logged in.
     visit "/sessions/sign_up_form"
-    page.must_have_content "Welcome to Gemgem!"
+    page.must_have_content "Welcome to Fantasia!"
   end
 
   # sign_out.
   it do
     visit "sessions/sign_out"
     page.current_path.must_equal "/"
-    page.wont_have_content "Hi, fred@trb.org" # login success.
+    page.wont_have_content "Hi, mike@example.com" # login success.
 
     sign_in!
-    page.must_have_content "Hi, fred@trb.org" # login success.
+    page.must_have_content "Hi, mike@example.com" # login success.
 
     click_link "Sign out"
     page.current_path.must_equal "/"
-    page.wont_have_content "Hi, fred@trb.org" # login success.
+    page.wont_have_content "Hi, mike@example.com" # login success.
   end
 end
