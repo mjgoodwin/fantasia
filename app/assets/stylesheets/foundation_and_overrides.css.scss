@@ -3,6 +3,16 @@
 @import 'settings';
 @import 'foundation';
 
+.top-bar-right ul.menu li a.button{
+  color: #fff;
+  margin-right: 1rem;
+}
+
+form.admin {
+  background: #e67e22;
+  padding: 9px;
+}
+
 // If you'd like to include motion-ui, you need to install the motion-ui sass package.
 //
 //@import 'motion-ui';
@@ -49,13 +59,3 @@
 //
 //@include motion-ui-transitions;
 //@include motion-ui-animations;
-
-.top-bar-right ul.menu li a.button{
-  color: #fff;
-  margin-right: 1rem;
-}
-
-form.admin {
-  background: #e67e22;
-  padding: 9px;
-}
