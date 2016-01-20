@@ -14,10 +14,6 @@
  *= require_self
 
  */
-@import 'foundation-icons';
-@import "foundation_and_overrides";
 
-form.admin {
-  background: #e67e22;
-  padding: 9px;
-}
+@import 'foundation-icons';
+@import "foundation_and_overrides.css.scss";
