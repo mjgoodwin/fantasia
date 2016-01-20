@@ -2,9 +2,9 @@
   %li
     = welcome_signed_in
   %li
-    = link_to "Sign out", sessions_sign_out_path
+    = link_to "Sign Out", sessions_sign_out_path, class: "button"
 - else
   %li
-    = link_to "Sign in", sessions_sign_in_form_path
+    = link_to "Sign In", sessions_sign_in_form_path
   %li
-    = link_to "Sign up", sessions_sign_up_form_path
+    = link_to "Sign Up", sessions_sign_up_form_path, class: "button"
