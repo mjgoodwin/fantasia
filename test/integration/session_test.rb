@@ -67,11 +67,11 @@ class SessionIntegrationTest < Trailblazer::Test::Integration
 
     # no sign_in screen for logged in.
     visit "/sessions/sign_in_form"
-    page.must_have_content "Welcome to Fantasia!"
+    page.must_have_content "Welcome to Fantasia"
 
     # no sign_up screen for logged in.
     visit "/sessions/sign_up_form"
-    page.must_have_content "Welcome to Fantasia!"
+    page.must_have_content "Welcome to Fantasia"
   end
 
   # sign_out.
@@ -83,7 +83,7 @@ class SessionIntegrationTest < Trailblazer::Test::Integration
     sign_in!
     page.must_have_content "Hi, mike@example.com" # login success.
 
-    click_link "Sign out"
+    click_link "Sign Out"
     page.current_path.must_equal "/"
     page.wont_have_content "Hi, mike@example.com" # login success.
   end

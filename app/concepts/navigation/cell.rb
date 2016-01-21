@@ -14,6 +14,10 @@ module Navigation
       render
     end
 
+    def user_menu
+      render
+    end
+
     def welcome_signed_in
       link_to("#{impersonate_icon} Hi, #{current_user.email}".html_safe, user_path(current_user))
     end

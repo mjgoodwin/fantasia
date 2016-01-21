@@ -6,6 +6,7 @@ guard :minitest, spring: true do
 
   watch(%r{^test/integration})
   watch(%r{^test/concepts})              { 'test/integration' }
+  watch(%r{^app/concepts})               { 'test/integration' }
   watch(%r{^app/views})                  { 'test/integration' }
   watch(%r{^app/controllers})            { 'test/integration' }
 end

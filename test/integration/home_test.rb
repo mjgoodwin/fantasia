@@ -2,14 +2,12 @@ require 'test_helper'
 
 class HomeIntegrationTest < Trailblazer::Test::Integration
   it do
-    # Thing.delete_all
+    visit "/"
+    page.must_have_content "Welcome to Fantasia"
+    page.wont_have_css "ul.menu li a", text: "My Team"
 
-    # Thing::Create.(thing: {name: "Trailblazer"})
-    # Thing::Create.(thing: {name: "Descendents"})
-
-    # visit "/"
-
-    # page.must_have_css ".columns .header a", "Descendents" # TODO: test not-end.
-    # page.must_have_css ".columns.end .header a", "Trailblazer"
+    sign_in!
+    page.must_have_content "Leagues"
+    page.must_have_css "ul.menu li a", text: "My Team"
   end
 end

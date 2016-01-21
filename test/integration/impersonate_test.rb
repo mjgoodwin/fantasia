@@ -7,7 +7,7 @@ class SessionImpersonateTest < Trailblazer::Test::Integration
   # anonymous can't.
   it do
     visit "/?as=dave@example.com"
-    page.must_have_css "a", text: "Sign in" # not logged in.
+    page.must_have_css "a", text: "Sign In" # not logged in.
   end
 
   # signed-in can't.

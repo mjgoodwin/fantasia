@@ -1,6 +1,1 @@
-.row
-  %h3
-    Welcome to Fantasia!
-
-.row
-  = #concept("thing/cell/grid")
+= concept "homepage/cell", OpenStruct.new(current_user: params[:current_user], "signed_in?" => tyrant.signed_in?)
