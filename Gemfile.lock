@@ -63,6 +63,10 @@ GEM
     cells-haml (0.0.8)
       cells (~> 4.0.0.beta6)
       haml (>= 4.1.0.beta.1)
+    codecov (0.1.4)
+      json
+      simplecov
+      url
     coderay (1.1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -84,6 +88,7 @@ GEM
       declarative (~> 0.0.4)
       representable (>= 2.4.0, <= 3.1.0)
       uber
+    docile (1.1.5)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
     email_validator (1.6.0)
@@ -262,6 +267,11 @@ GEM
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
+    simplecov (0.11.1)
+      docile (~> 1.1.0)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
     slop (3.6.0)
     spring (1.6.2)
     sprockets (3.5.2)
@@ -301,6 +311,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
+    url (0.3.2)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -319,6 +330,7 @@ DEPENDENCIES
   binding_of_caller
   cells (= 4.0.3)
   cells-haml (= 0.0.8)
+  codecov
   coffee-rails (~> 4.1.0)
   disposable (>= 0.2.1)
   email_validator

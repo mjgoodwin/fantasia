@@ -31,6 +31,7 @@ group :test do
   gem "minitest-rails-capybara"
   gem "minitest-reporters"
   gem "m", "~> 1.3.1"
+  gem "codecov", require: false
 end
 
 group :development, :test do

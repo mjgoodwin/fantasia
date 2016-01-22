@@ -14,6 +14,13 @@ Minitest::Reporters.use!(
 
 Rails.backtrace_cleaner.remove_silencers!
 
+require 'simplecov'
+SimpleCov.start
+if ENV['CI']=='true'
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
+
 Minitest::Spec.class_eval do
   after :each do
     # DatabaseCleaner.clean
