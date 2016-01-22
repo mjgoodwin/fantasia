@@ -32,6 +32,7 @@ group :test do
   gem "minitest-reporters"
   gem "m", "~> 1.3.1"
   gem "codecov", require: false
+  gem "codeclimate-test-reporter", require: false
 end
 
 group :development, :test do

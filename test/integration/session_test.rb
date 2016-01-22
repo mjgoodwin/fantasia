@@ -67,11 +67,11 @@ class SessionIntegrationTest < Trailblazer::Test::Integration
 
     # no sign_in screen for logged in.
     visit "/sessions/sign_in_form"
-    page.must_have_content "Welcome to Fantasia"
+    page.must_have_content "Leagues"
 
     # no sign_up screen for logged in.
     visit "/sessions/sign_up_form"
-    page.must_have_content "Welcome to Fantasia"
+    page.must_have_content "Leagues"
   end
 
   # sign_out.

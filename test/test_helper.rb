@@ -1,3 +1,14 @@
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
+require 'simplecov'
+SimpleCov.start
+if ENV['CI']=='true'
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+  ENV['CODECLIMATE_REPO_TOKEN'] = "f8cdf68b53184933ea7db220537b6f658b3d617af0206db387c602db5553bef0"
+end
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
@@ -13,13 +24,6 @@ Minitest::Reporters.use!(
   Minitest.backtrace_filter)
 
 Rails.backtrace_cleaner.remove_silencers!
-
-require 'simplecov'
-SimpleCov.start
-if ENV['CI']=='true'
-  require 'codecov'
-  SimpleCov.formatter = SimpleCov::Formatter::Codecov
-end
 
 Minitest::Spec.class_eval do
   after :each do
