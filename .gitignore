@@ -17,6 +17,7 @@
 !/log/.keep
 !/tmp/.keep
 /test/reports
+/coverage/
 
 # Ignore Byebug command history file.
 .byebug_history
