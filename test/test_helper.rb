@@ -1,12 +1,21 @@
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
-
 require 'simplecov'
-SimpleCov.start
-if ENV['CI']=='true'
+SimpleCov.start do
+  add_filter "/config/"
+  add_filter "/test/"
+
+  add_group "Concepts", "app/concepts"
+  add_group "Controllers", "app/controllers"
+  add_group "Lib", "app/lib"
+  add_group "Models", "app/models"
+end
+
+if ENV['CI'] == 'true'
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
+  ENV['CODECLIMATE_REPO_TOKEN'] = "f8cdf68b53184933ea7db220537b6f658b3d617af0206db387c602db5553bef0"
+
   require 'codecov'
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
-  ENV['CODECLIMATE_REPO_TOKEN'] = "f8cdf68b53184933ea7db220537b6f658b3d617af0206db387c602db5553bef0"
 end
 
 ENV['RAILS_ENV'] ||= 'test'
