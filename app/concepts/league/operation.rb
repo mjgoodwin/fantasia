@@ -3,8 +3,16 @@ class League < ActiveRecord::Base
     include Model
     model League, :create
 
+    contract do
+      property :name
+
+      validates :name, presence: true
+    end
+
     def process(params)
-      @model = League.create(params[:league])
+      validate(params[:league]) do |f|
+        f.save
+      end
     end
   end
 end

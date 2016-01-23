@@ -37,14 +37,13 @@ end
 
 group :development, :test do
   gem "pry-byebug"
-  # gem "minitest"
 end
 
 group :production do
   gem "rails_12factor"
 end
 
-# gem "responders"
+gem "responders"
 
 gem "representable", "2.4.0"
 gem "reform", "2.1"
