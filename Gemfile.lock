@@ -63,8 +63,6 @@ GEM
     cells-haml (0.0.8)
       cells (~> 4.0.0.beta6)
       haml (>= 4.1.0.beta.1)
-    codeclimate-test-reporter (0.4.8)
-      simplecov (>= 0.7.1, < 1.0.0)
     codecov (0.1.4)
       json
       simplecov
@@ -334,7 +332,6 @@ DEPENDENCIES
   binding_of_caller
   cells (= 4.0.3)
   cells-haml (= 0.0.8)
-  codeclimate-test-reporter
   codecov
   coffee-rails (~> 4.1.0)
   disposable (>= 0.2.1)

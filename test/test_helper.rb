@@ -10,12 +10,9 @@ SimpleCov.start do
 end
 
 if ENV['CI'] == 'true'
-  require "codeclimate-test-reporter"
-  CodeClimate::TestReporter.start
-  ENV['CODECLIMATE_REPO_TOKEN'] = "f8cdf68b53184933ea7db220537b6f658b3d617af0206db387c602db5553bef0"
-
   require 'codecov'
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
+  ENV['CODECOV_TOKEN'] = '473c8c5b-10ee-4d83-86c6-bfd72a185a27'
 end
 
 ENV['RAILS_ENV'] ||= 'test'
