@@ -12,7 +12,7 @@ end
 if ENV['CI'] == 'true'
   require 'codecov'
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
-  ENV['CODECOV_TOKEN'] = '473c8c5b-10ee-4d83-86c6-bfd72a185a27'
+  ENV['CODECOV_TOKEN'] = 'e80bb932-9378-4ff7-bc90-437729944729'
 end
 
 ENV['RAILS_ENV'] ||= 'test'
