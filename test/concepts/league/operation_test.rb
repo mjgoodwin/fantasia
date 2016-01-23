@@ -9,7 +9,21 @@ class LeagueOperationTest < MiniTest::Spec
 
       league.persisted?.must_equal true
       league.name.must_equal "Mickey Mouse League"
-      # league.commissioner.must_equal user
+      league.commissioner.must_equal user
+    end
+
+    it "invalid - no name" do
+      res, op = League::Create.run(league: { commissioner: user })
+
+      res.must_equal false
+      op.errors.to_s.must_equal  "{:name=>[\"can't be blank\"]}"
+    end
+
+    it "invalid - no commissioner" do
+      res, op = League::Create.run(league: { name: "Mickey Mouse League" })
+
+      res.must_equal false
+      op.errors.to_s.must_equal  "{:commissioner=>[\"can't be blank\"]}"
     end
   end
 end
