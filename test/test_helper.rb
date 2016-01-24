@@ -22,12 +22,11 @@ require 'rails/test_help'
 require "minitest/autorun"
 require "trailblazer/rails/test/integration"
 
-require "minitest/reporters"
-# Minitest::Reporters.use! [Minitest::Reporters::ProgressReporter.new]#, Minitest::Reporters::MeanTimeReporter.new]
-Minitest::Reporters.use!(
-  Minitest::Reporters::ProgressReporter.new,
-  ENV,
-  Minitest.backtrace_filter)
+# require "minitest/reporters"
+# Minitest::Reporters.use!(
+#   Minitest::Reporters::SpecReporter.new,
+#   ENV,
+#   Minitest.backtrace_filter)
 
 Rails.backtrace_cleaner.remove_silencers!
 
