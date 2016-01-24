@@ -29,9 +29,9 @@ end
 
 group :test do
   gem "minitest-rails-capybara"
-  gem "fivemat"
   # gem "minitest-reporters"
   gem "m", "~> 1.3.1"
+  gem "fivemat"
   gem "codecov", require: false
 end
 
