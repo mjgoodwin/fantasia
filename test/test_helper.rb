@@ -1,12 +1,14 @@
-require 'simplecov'
-SimpleCov.start do
-  add_filter "/config/"
-  add_filter "/test/"
+unless ENV['SUBLIME'] == 'true'
+  require 'simplecov'
+  SimpleCov.start do
+    add_filter "/config/"
+    add_filter "/test/"
 
-  add_group "Concepts",    "app/concepts"
-  add_group "Controllers", "app/controllers"
-  add_group "Lib",         "app/lib"
-  add_group "Models",      "app/models"
+    add_group "Concepts",    "app/concepts"
+    add_group "Controllers", "app/controllers"
+    add_group "Lib",         "app/lib"
+    add_group "Models",      "app/models"
+  end
 end
 
 if ENV['CI'] == 'true'
@@ -35,6 +37,15 @@ Minitest::Spec.class_eval do
     # DatabaseCleaner.clean
     Team.delete_all
     User.delete_all
+  end
+end
+
+Minitest::Test.class_eval do
+  def location
+    loc = " [#{self.failure.location}]" unless passed? || error?
+    test_class = self.class.to_s.gsub "::", " / "
+    test_name = self.name.to_s.gsub /\Atest_\d{4,}_/, ""
+    "#{test_class} / #{test_name}#{loc}"
   end
 end
 

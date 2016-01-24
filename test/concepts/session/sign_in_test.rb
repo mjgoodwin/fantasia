@@ -1,8 +1,7 @@
 require "test_helper"
 
 class SessionSignInTest < MiniTest::Spec
-  # successful.
-  it do
+  it "valid credentials" do
     sign_in_op = Session::SignUp.(user: {
       email: "mike@example.com", password: "123123", confirm_password: "123123",
     })
@@ -15,8 +14,7 @@ class SessionSignInTest < MiniTest::Spec
     op.model.must_equal sign_in_op.model
   end
 
-  # wrong password.
-  it do
+  it "wrong password" do
     sign_in_op = Session::SignUp.(user: {
       email: "mike@example.com", password: "123123", confirm_password: "123123",
     })
@@ -30,8 +28,7 @@ class SessionSignInTest < MiniTest::Spec
     op.model.must_equal nil
   end
 
-  # empty form.
-  it do
+  it "empty form" do
     res, op = Session::SignIn.run(session: {
       email: "",
       password: ""

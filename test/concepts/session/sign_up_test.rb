@@ -1,8 +1,7 @@
 require "test_helper"
 
 class SessionSignUpTest < MiniTest::Spec
-  # successful.
-  it do
+  it "valid input" do
     res, op = Session::SignUp.run(user: {
       email: "mike@example.com",
       password: "123123",
@@ -15,8 +14,7 @@ class SessionSignUpTest < MiniTest::Spec
     assert Tyrant::Authenticatable.new(op.model).digest == "123123"
   end
 
-  # not filled out.
-  it do
+  it "empty input" do
     res, op = Session::SignUp.run(user: {
       email: "",
       password: "",
@@ -28,8 +26,7 @@ class SessionSignUpTest < MiniTest::Spec
     op.errors.to_s.must_equal "{:email=>[\"can't be blank\", \"is invalid\"], :password=>[\"can't be blank\"], :confirm_password=>[\"can't be blank\"]}"
   end
 
-  # password mismatch.
-  it do
+  it "password mismatch" do
     res, op = Session::SignUp.run(user: {
       email: "mike@example.com",
       password: "123123",
@@ -41,8 +38,7 @@ class SessionSignUpTest < MiniTest::Spec
     op.errors.to_s.must_equal "{:password=>[\"Passwords don't match\"]}"
   end
 
-  # email taken.
-  it do
+  it "email taken" do
     Session::SignUp.run(user: {
       email: "mike@example.com", password: "123123", confirm_password: "123123",
     })
