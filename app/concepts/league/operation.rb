@@ -27,4 +27,8 @@ class League < ActiveRecord::Base
     # include Trailblazer::Operation::Policy
     # policy League::Policy, :show?
   end
+
+  class Update < Create
+    action :update
+  end
 end

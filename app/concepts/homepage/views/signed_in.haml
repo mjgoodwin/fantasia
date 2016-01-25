@@ -8,6 +8,6 @@
       - League.popular.each do |league|
         .column
           .callout
-            #{league.name}
-            = #image_tag "http://placehold.it/400x370"
-            = image_tag "/assets/logos/mickey_01.svg", size: "300"
+            = link_to league_path(league) do
+              #{league.name}
+              = image_tag "/assets/logos/mickey_01.svg", size: "300"

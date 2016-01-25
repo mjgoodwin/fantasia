@@ -1,8 +1,11 @@
-%h3 Start A League
+- if @model.persisted?
+  %h3 Edit League
+- else
+  %h3 Start A League
 
-= simple_form_for(@form, url: leagues_path, method: :post) do |f|
+= simple_form_for @form do |f|
   = f.input :name, placeholder: "Name", label: false#, readonly: @form.readonly?(:name)
 
-  = f.submit
+  = f.button :submit, class: :expand
 
 = @form.errors.messages

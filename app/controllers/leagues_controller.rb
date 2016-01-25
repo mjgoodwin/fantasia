@@ -14,4 +14,17 @@ class LeaguesController < ApplicationController
   def show
     present League::Show
   end
+
+  def edit
+    form League::Update
+    render :new
+  end
+
+  def update
+    run League::Update do |op|
+      return redirect_to op.model
+    end
+
+    render :new
+  end
 end
