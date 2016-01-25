@@ -32,11 +32,14 @@ require "trailblazer/rails/test/integration"
 
 Rails.backtrace_cleaner.remove_silencers!
 
+DatabaseCleaner.strategy = :transaction
 Minitest::Spec.class_eval do
+  before :each do
+    DatabaseCleaner.start
+  end
+
   after :each do
-    # DatabaseCleaner.clean
-    Team.delete_all
-    User.delete_all
+    DatabaseCleaner.clean
   end
 end
 

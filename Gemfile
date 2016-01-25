@@ -32,6 +32,7 @@ group :test do
   # gem "minitest-reporters"
   gem "m", "~> 1.3.1"
   gem "fivemat"
+  gem "database_cleaner"
   gem "codecov", require: false
 end
 
