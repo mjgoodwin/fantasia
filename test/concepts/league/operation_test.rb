@@ -12,6 +12,12 @@ class LeagueOperationTest < MiniTest::Spec
       league.commissioner.must_equal user
     end
 
+    it "creates commissioner's team" do
+      league = League::Create.call(league: { name: "Mickey Mouse League", commissioner: user }).model
+
+      league.teams.size.must_equal 1
+    end
+
     it "invalid - no name" do
       res, op = League::Create.run(league: { commissioner: user })
 
