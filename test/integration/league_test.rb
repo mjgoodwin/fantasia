@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class LeagueIntegrationTest < Trailblazer::Test::Integration
-  it "super flow" do
+  it "commissioner flow" do
     sign_in!("mike@example.com")
     click_link "Create League"
 
@@ -23,8 +23,14 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     page.body.must_match /Mickey Mouse League/
     click_link "Mickey Mouse League"
 
-    # edit
+    # edit league
     click_link "Edit"
+    fill_in 'Name', with: "Donald Duck League"
+    click_button "Update League"
+    page.body.must_match /Donald Duck League/
+
+    # set roster
+    page.must_have_content "Roster"
     # league = league.last
     # visit "/leagues/#{league.id}/edit"
     # page.wont_have_css "form #league_name"

@@ -1,7 +1,7 @@
 require "test_helper"
 
 class LeagueOperationTest < MiniTest::Spec
-  let(:user)        { User.create(email: "mike@example.com") }
+  let(:user) { User.create(email: "mike@example.com") }
 
   describe "League::Create" do
     it "persists valid" do
