@@ -38,6 +38,7 @@ end
 
 group :development, :test do
   gem "pry-byebug"
+  gem 'bundler-audit', require: false
 end
 
 group :production do
