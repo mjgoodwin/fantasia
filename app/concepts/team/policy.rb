@@ -14,7 +14,7 @@ class Team::Policy
   end
 
   def show?
-    true # FIXME: make that "configurable"
+    true
   end
 
   def edit?
