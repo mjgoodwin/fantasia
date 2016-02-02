@@ -29,6 +29,7 @@ end
 
 group :test do
   gem "minitest-rails-capybara"
+  # gem "minitest-around", require: false
   # gem "minitest-reporters"
   gem "m", "~> 1.3.1"
   gem "fivemat"

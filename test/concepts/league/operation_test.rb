@@ -1,11 +1,11 @@
 require "test_helper"
 
 class LeagueOperationTest < MiniTest::Spec
-  let(:user) { User.create(email: "mike@example.com") }
+  let(:user) { User::Create.(user: {email: "mike@example.com"}).model }
 
   describe "League::Create" do
     it "persists valid" do
-      league = League::Create.call(league: { name: "Mickey Mouse League", commissioner: user }).model
+      league = League::Create.(league: { name: "Mickey Mouse League", commissioner: user }).model
 
       league.persisted?.must_equal true
       league.name.must_equal "Mickey Mouse League"
@@ -13,7 +13,7 @@ class LeagueOperationTest < MiniTest::Spec
     end
 
     it "creates commissioner's team" do
-      league = League::Create.call(league: { name: "Mickey Mouse League", commissioner: user }).model
+      league = League::Create.(league: { name: "Mickey Mouse League", commissioner: user }).model
 
       league.teams.size.must_equal 1
     end

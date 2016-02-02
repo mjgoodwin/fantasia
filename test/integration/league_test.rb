@@ -37,8 +37,8 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
   end
 
   it "non-commissioner flow" do
-    commissioner = User.create(email: "mike@example.com")
-    League::Create.call(league: { name: "Mickey Mouse League", commissioner: commissioner }).model
+    commissioner = User::Create.(user: {email: "mike@example.com"}).model
+    League::Create.(league: { name: "Mickey Mouse League", commissioner: commissioner }).model
 
     sign_in!("dave@example.com")
     click_link "Mickey Mouse League"

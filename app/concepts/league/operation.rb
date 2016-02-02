@@ -19,7 +19,7 @@ class League < ActiveRecord::Base
 
       validate(params[:league]) do |f|
         f.save
-        Team::Create.call(team: { league: f.model, owners: [f.model.commissioner] })
+        Team::Create.(team: { league: f.model, owners: [f.model.commissioner] })
       end
     end
   end
