@@ -1,4 +1,4 @@
-class Team::Policy
+class League::Policy
   include Fantasia::Policy
 
   def create?
@@ -14,7 +14,7 @@ class Team::Policy
   end
 
   def edit?
-    signed_in? && (admin? || user.teams.include?(model))
+    signed_in? && (admin? || (user == model.commissioner))
   end
 
   def delete?

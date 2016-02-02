@@ -14,6 +14,7 @@ class LeagueOperationTest < MiniTest::Spec
 
     it "creates commissioner's team" do
       league = League::Create.call(league: { name: "Mickey Mouse League", commissioner: user }).model
+
       league.teams.size.must_equal 1
     end
 
@@ -21,14 +22,14 @@ class LeagueOperationTest < MiniTest::Spec
       res, op = League::Create.run(league: { commissioner: user })
 
       res.must_equal false
-      op.errors.to_s.must_equal  "{:name=>[\"can't be blank\"]}"
+      op.errors.to_s.must_equal "{:name=>[\"can't be blank\"]}"
     end
 
     it "invalid - no commissioner" do
       res, op = League::Create.run(league: { name: "Mickey Mouse League" })
 
       res.must_equal false
-      op.errors.to_s.must_equal  "{:commissioner=>[\"can't be blank\"]}"
+      op.errors.to_s.must_equal "{:commissioner=>[\"can't be blank\"]}"
     end
   end
 end

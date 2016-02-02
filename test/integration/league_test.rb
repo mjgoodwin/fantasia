@@ -35,4 +35,14 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     # visit "/leagues/#{league.id}/edit"
     # page.wont_have_css "form #league_name"
   end
+
+  it "non-commissioner flow" do
+    commissioner = User.create(email: "mike@example.com")
+    League::Create.call(league: { name: "Mickey Mouse League", commissioner: commissioner }).model
+
+    sign_in!("dave@example.com")
+    click_link "Mickey Mouse League"
+
+    page.wont_have_css "a", text: "Edit"
+  end
 end

@@ -3,6 +3,9 @@ class League < ActiveRecord::Base
     include Model
     model League, :create
 
+    include Trailblazer::Operation::Policy
+    policy League::Policy, :create?
+
     contract do
       property :name
       property :commissioner
@@ -25,11 +28,12 @@ class League < ActiveRecord::Base
     include Model
     model League, :find
 
-    # include Trailblazer::Operation::Policy
-    # policy League::Policy, :show?
+    include Trailblazer::Operation::Policy
+    policy League::Policy, :show?
   end
 
   class Update < Create
+    policy League::Policy, :update?
     action :update
   end
 end
