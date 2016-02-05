@@ -3,11 +3,14 @@
     #{@model.name}
     - if @operation.policy.call(:edit?)
       = link_to "Edit", edit_league_path(@model)
+    - if @operation.policy.call(:join?)
+      = link_to "Join", join_league_path(@model)
     -# - if @league_op.policy.(:delete?)
     -#   = link_to "Delete", league_path(@model), method: :delete
 
 .commissioner
   Commish: #{@model.commissioner.email}
 
-%h2
-  Roster
+.roster
+  %h3
+    Roster

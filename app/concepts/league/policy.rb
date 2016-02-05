@@ -20,4 +20,8 @@ class League::Policy
   def delete?
     edit?
   end
+
+  def join?
+    user.leagues.exclude? model
+  end
 end
