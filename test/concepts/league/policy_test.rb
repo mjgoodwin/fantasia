@@ -1,0 +1,49 @@
+require "test_helper"
+
+class LeaguePolicyTest < MiniTest::Spec
+  let (:commissioner) { User::Create.(user: { email: "mike@example.com" }).model }
+  let (:league) { League::Create.(league: { name: "Mickey Mouse League", commissioner: commissioner }).model }
+
+  let (:policy) { League::Update.policy_config.(user, league) }
+
+  describe "League::Policy" do
+    describe "NOT signed in" do
+      let (:user) { nil }
+      it { policy.update?.must_equal false }
+    end
+
+    describe "signed in" do
+      let (:user) { User::Create.(user: {email: "dave@example.com"}).model }
+
+      # is commissioner
+      it do
+        policy = League::Update.policy_config.(commissioner, league)
+        policy.update?.must_equal true
+      end
+
+      # not commissioner
+      it do
+        policy = League::Update.policy_config.(user, league)
+        policy.update?.must_equal false
+      end
+    end
+
+    describe "admin" do
+      let (:admin) { User::Create.(user: {"email"=> "noochworldorder@gmail.com"}).model }
+
+      # is commissioner
+      it do
+        league  = League::Create.(league: { name: "Donald Duck League", commissioner: admin }).model
+        policy = League::Update.policy_config.(admin, league)
+
+        policy.update?.must_equal true
+      end
+
+      # not commissioner
+      it do
+        policy = League::Update.policy_config.(admin, league)
+        policy.update?.must_equal true
+      end
+    end
+  end
+end

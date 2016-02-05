@@ -3,6 +3,9 @@ class Team < ActiveRecord::Base
     include Model
     model Team, :create
 
+    include Trailblazer::Operation::Policy
+    policy Team::Policy, :create?
+
     contract do
       property :name
       property :league
@@ -23,5 +26,18 @@ class Team < ActiveRecord::Base
     def setup_model!(params)
       model.owners.build
     end
+  end
+
+  class Show < Trailblazer::Operation
+    include Model
+    model Team, :find
+
+    include Trailblazer::Operation::Policy
+    policy Team::Policy, :show?
+  end
+
+  class Update < Create
+    policy Team::Policy, :update?
+    action :update
   end
 end
