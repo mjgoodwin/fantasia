@@ -27,4 +27,10 @@ class LeaguesController < ApplicationController
 
     render :new
   end
+
+  def join
+    run League::Join do |op|
+      return redirect_to op.model
+    end
+  end
 end

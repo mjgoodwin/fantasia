@@ -30,7 +30,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     page.body.must_match /Donald Duck League/
 
     # set roster
-    page.must_have_content "Roster"
+    page.must_have_css ".team"
     # league = league.last
     # visit "/leagues/#{league.id}/edit"
     # page.wont_have_css "form #league_name"
@@ -44,5 +44,10 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     click_link "Mickey Mouse League"
 
     page.wont_have_css "a", text: "Edit"
+    page.wont_have_css ".team"
+
+    click_link "Join"
+
+    page.must_have_css ".team"
   end
 end

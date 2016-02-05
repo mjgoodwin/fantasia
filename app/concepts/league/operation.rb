@@ -24,6 +24,22 @@ class League < ActiveRecord::Base
     end
   end
 
+  class Join < Trailblazer::Operation
+    include Model
+    model League, :find
+
+    include Trailblazer::Operation::Policy
+    policy League::Policy, :join?
+
+    def process(params)
+      params[:owner] ||= params[:current_user]
+
+      validate(params) do |f|
+        Team::Create.(team: { league: f.model, owners: [params[:owner]] })
+      end
+    end
+  end
+
   class Show < Trailblazer::Operation
     include Model
     model League, :find

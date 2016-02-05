@@ -11,6 +11,8 @@
 .commissioner
   Commish: #{@model.commissioner.email}
 
-.roster
-  %h3
-    Roster
+- @team = tyrant.current_user.team_for(@model)
+- if @team
+  .team
+    %h3
+      Roster
