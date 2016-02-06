@@ -9,6 +9,7 @@ class League < ActiveRecord::Base
     contract do
       property :name
       property :commissioner
+      property :emoji, virtual: true
 
       validates :name, presence: true
       validates :commissioner, presence: true

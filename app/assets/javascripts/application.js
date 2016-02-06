@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+//= require rails_emoji_picker
 //= require_tree .
 //= require rails-timeago
 

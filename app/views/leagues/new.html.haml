@@ -8,4 +8,7 @@
 
   = f.button :submit, class: :expand
 
+  .emoji-picker-container
+    = f.text_field :emoji, class: 'form-control', data: { emojiable: true }
+
 = @form.errors.messages

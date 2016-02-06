@@ -109,6 +109,7 @@ GEM
     foundation-rails (6.1.1.1)
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
+    gemoji (2.1.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     guard (2.13.0)
@@ -223,6 +224,8 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
+    rails_emoji_picker (0.1.0)
+      gemoji
     rails_layout (1.0.29)
     rails_real_favicon (0.0.3)
       json (~> 1.7)
@@ -355,6 +358,7 @@ DEPENDENCIES
   rails (~> 4.2.0)
   rails-timeago
   rails_12factor
+  rails_emoji_picker
   rails_layout
   rails_real_favicon
   reform (= 2.1)

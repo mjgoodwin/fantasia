@@ -39,7 +39,7 @@ end
 
 group :development, :test do
   gem "pry-byebug"
-  gem 'bundler-audit', require: false
+  gem "bundler-audit", require: false
 end
 
 group :production do
@@ -72,3 +72,5 @@ gem "rails-timeago"
 gem "email_validator", require: "email_validator/strict"
 
 gem "foundation-icons-sass-rails"
+
+gem "rails_emoji_picker"

@@ -11,8 +11,10 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require rails_emoji_picker
  *= require_self
  */
 
 @import 'foundation-icons';
 @import "foundation_and_overrides.css.scss";
+@import 'rails_emoji_picker'
