@@ -19,7 +19,7 @@ class League < ActiveRecord::Base
 
       validate(params[:league]) do |f|
         f.save
-        Team::Create.(team: { league: f.model, owners: [f.model.commissioner] })
+        League::Join.(id: f.model.id, owner: f.model.commissioner)
       end
     end
   end
@@ -38,6 +38,13 @@ class League < ActiveRecord::Base
         Team::Create.(team: { league: f.model, owners: [params[:owner]] })
       end
     end
+
+    private
+
+    def evaluate_policy(params)
+      params[:current_user] ||= params[:owner]
+      super(params)
+    end
   end
 
   class Show < Trailblazer::Operation
@@ -51,5 +58,11 @@ class League < ActiveRecord::Base
   class Update < Create
     policy League::Policy, :update?
     action :update
+
+    def process(params)
+      validate(params[:league]) do |f|
+        f.save
+      end
+    end
   end
 end
