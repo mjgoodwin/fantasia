@@ -5,7 +5,8 @@ module Fantasia::Cell
       base.send :include, Rails::Timeago::Helper
     end
 
-  private
+    private
+
     def created_at
       timeago_tag(super)
     end
