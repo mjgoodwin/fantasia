@@ -8,11 +8,16 @@
     -# - if @league_op.policy.(:delete?)
     -#   = link_to "Delete", league_path(@model), method: :delete
 
-.commissioner
-  Commish: #{@model.commissioner.email}
+%table.teams
+  - @model.teams.each do |team|
+    %tr
+      %td
+        #{team.owners.map(&:email).join}
+        - if team.owners.include? @model.commissioner
+          (Commissioner)
 
 - @team = tyrant.current_user.team_for(@model)
 - if @team
-  .team
+  .roster
     %h3
       Roster

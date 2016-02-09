@@ -16,7 +16,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     # show
     page.current_path.must_equal league_path(League.last)
     page.body.must_match /Mickey Mouse League/
-    page.body.must_match /Commish: mike@example.com/
+    page.body.must_match /mike@example.com\s\(Commissioner\)/
 
     # league listing
     visit "/"
@@ -30,7 +30,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     page.body.must_match /Donald Duck League/
 
     # set roster
-    page.must_have_css ".team"
+    page.must_have_css ".roster"
     # league = league.last
     # visit "/leagues/#{league.id}/edit"
     # page.wont_have_css "form #league_name"
@@ -44,10 +44,10 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     click_link "Mickey Mouse League"
 
     page.wont_have_css "a", text: "Edit"
-    page.wont_have_css ".team"
+    page.wont_have_css ".roster"
 
     click_link "Join"
 
-    page.must_have_css ".team"
+    page.must_have_css ".roster"
   end
 end
