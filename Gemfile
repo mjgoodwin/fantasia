@@ -9,11 +9,9 @@ gem "haml-rails"
 gem "simple_form"
 gem "thin"
 
-group :assets do
-  gem "sass-rails", "~> 5.0.4"
-  gem "coffee-rails", "~> 4.1.0"
-  gem "uglifier", ">= 1.3.0"
-end
+gem "sass-rails", "~> 5.0.4"
+gem "coffee-rails", "~> 4.1.0"
+gem "uglifier", ">= 1.3.0"
 
 group :development do
   gem "binding_of_caller"
@@ -22,8 +20,8 @@ group :development do
   gem "rails_layout"
   gem "better_errors"
   gem "rack-mini-profiler"
-  gem "guard"
-  gem "guard-minitest"
+  # gem "guard"
+  # gem "guard-minitest"
   gem "rails_real_favicon"
 end
 
@@ -39,7 +37,8 @@ end
 
 group :development, :test do
   gem "pry-byebug"
-  gem 'bundler-audit', require: false
+  gem "pry-rails"
+  gem "bundler-audit", require: false
 end
 
 group :production do
