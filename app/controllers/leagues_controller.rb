@@ -13,6 +13,8 @@ class LeaguesController < ApplicationController
 
   def show
     present League::Show
+
+    @team = @model.team_for(tyrant.current_user)
   end
 
   def edit

@@ -5,7 +5,7 @@
       = link_to "Edit", edit_league_path(@model)
     - if @operation.policy.call(:join?)
       = link_to "Join", join_league_path(@model)
-    -# - if @league_op.policy.(:delete?)
+    -# - if @operation.policy.(:delete?)
     -#   = link_to "Delete", league_path(@model), method: :delete
 
 %table.teams
@@ -15,7 +15,8 @@
         #{team.owners.map(&:email).join}
         - if team.owners.include? @model.commissioner
           (Commissioner)
+      %td
+        #{team.name}
 
-- team = tyrant.current_user.team_for(@model)
-- if team
-  = concept "team/cell", team
+- if @team
+  = concept "team/cell", @team

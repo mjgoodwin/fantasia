@@ -28,12 +28,6 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     fill_in 'Name', with: "Donald Duck League"
     click_button "Update League"
     page.body.must_match /Donald Duck League/
-
-    # set roster
-    page.must_have_css ".roster"
-    # league = league.last
-    # visit "/leagues/#{league.id}/edit"
-    # page.wont_have_css "form #league_name"
   end
 
   it "non-commissioner flow" do
@@ -48,6 +42,9 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
 
     click_link "Join"
 
-    page.must_have_css ".roster"
+    page.wont_have_css ".roster"
+    # page.body.must_match /Player 1/
+    # page.body.must_match /Player 2/
+    # page.body.must_match /Player 3/
   end
 end

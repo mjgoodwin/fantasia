@@ -5,9 +5,6 @@ class League < ActiveRecord::Base
   scope :popular, lambda { order("id DESC") }
 
   def team_for(owner)
-    teams.includes(:ownerships)
-      .where("ownerships.user_id = ?", owner.id)
-      .references(:ownerships)
-      .first
+    teams.joins(:owners).where("users.id = ?", owner.id).first
   end
 end
