@@ -43,6 +43,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     click_link "Join"
 
     page.wont_have_css ".roster"
+    page.must_have_css "a.button", text: "Set-up your team!"
     # page.body.must_match /Player 1/
     # page.body.must_match /Player 2/
     # page.body.must_match /Player 3/

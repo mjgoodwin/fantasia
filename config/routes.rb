@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get  :join
     end
   end
+  resources :teams
 
   get  "sessions/sign_up_form"
   post "sessions/sign_up"

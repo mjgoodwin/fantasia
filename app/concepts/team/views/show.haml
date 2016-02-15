@@ -1,4 +1,11 @@
-- if false
-  .roster
-    %h3
-      Roster
+- if policy.(:edit?)
+  - if name.present?
+    %h2 #{name}
+    .roster
+      %h3
+        Roster
+  - else
+    = link_to "Set-up your team!", edit_team_path(model), class: "button"
+
+- elsif policy.(:show?)
+  Visitor view????

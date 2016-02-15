@@ -1,9 +1,9 @@
 .header
   %h1
     #{@model.name}
-    - if @operation.policy.call(:edit?)
+    - if @operation.policy.(:edit?)
       = link_to "Edit", edit_league_path(@model)
-    - if @operation.policy.call(:join?)
+    - if @operation.policy.(:join?)
       = link_to "Join", join_league_path(@model)
     -# - if @operation.policy.(:delete?)
     -#   = link_to "Delete", league_path(@model), method: :delete
