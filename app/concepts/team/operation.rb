@@ -20,12 +20,6 @@ class Team < ActiveRecord::Base
         f.save
       end
     end
-
-    private
-
-    def setup_model!(params)
-      model.owners.build
-    end
   end
 
   class Update < Trailblazer::Operation
