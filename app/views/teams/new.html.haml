@@ -1,0 +1,6 @@
+= simple_form_for @form do |f|
+  = f.input :name, placeholder: "Name", label: false
+
+  = f.button :submit, "Save Team", class: :expand
+
+= @form.errors.messages

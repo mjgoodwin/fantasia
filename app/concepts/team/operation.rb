@@ -28,16 +28,32 @@ class Team < ActiveRecord::Base
     end
   end
 
+  class Update < Trailblazer::Operation
+    include Model
+    model Team, :update
+
+    include Trailblazer::Operation::Policy
+    policy Team::Policy, :update?
+
+    contract do
+      property :name
+
+      validates :name, presence: true
+    end
+
+    def process(params)
+      # binding.pry
+      validate(params[:team]) do |f|
+        f.save
+      end
+    end
+  end
+
   class Show < Trailblazer::Operation
     include Model
     model Team, :find
 
     include Trailblazer::Operation::Policy
     policy Team::Policy, :show?
-  end
-
-  class Update < Create
-    policy Team::Policy, :update?
-    action :update
   end
 end

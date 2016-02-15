@@ -36,16 +36,24 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
 
     sign_in!("dave@example.com")
     click_link "Mickey Mouse League"
-
     page.wont_have_css "a", text: "Edit"
+    page.wont_have_css "a", text: "Delete"
     page.wont_have_css ".roster"
 
     click_link "Join"
-
     page.wont_have_css ".roster"
-    page.must_have_css "a.button", text: "Set-up your team!"
-    # page.body.must_match /Player 1/
-    # page.body.must_match /Player 2/
-    # page.body.must_match /Player 3/
+
+    click_link "Set-up your team!"
+
+    click_button "Save Team"
+    page.must_have_css ".error"
+
+    fill_in "Name", with: "Mighty Ducks"
+    # fill_in "Player 1", with: "Bubba Watson"
+    click_button "Save Team"
+
+    page.must_have_css ".roster"
+    page.body.must_match /Mighty Ducks/
+    # page.body.must_match /Bubba Watson/
   end
 end
