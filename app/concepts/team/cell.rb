@@ -7,6 +7,8 @@ class Team::Cell < ::Cell::Concept
     render
   end
 
+  private
+
   def policy
     @policy ||= Team::Policy.new(params[:current_user], model)
   end

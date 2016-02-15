@@ -10,7 +10,7 @@
 
 %table.teams
   - @model.teams.each do |team|
-    %tr
+    %tr{class: ("my-team" if team.owners.include?(params[:current_user]))}
       %td
         #{team.owners.map(&:email).join}
         - if team.owners.include? @model.commissioner
