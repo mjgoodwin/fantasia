@@ -320,6 +320,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   m (~> 1.3.1)
+  minitest
   minitest-rails-capybara
   pg
   pry-byebug

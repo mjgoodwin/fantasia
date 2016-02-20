@@ -26,6 +26,7 @@ group :development do
 end
 
 group :test do
+  gem "minitest"
   gem "minitest-rails-capybara"
   # gem "minitest-around", require: false
   # gem "minitest-reporters"
