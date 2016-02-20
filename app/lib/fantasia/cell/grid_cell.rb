@@ -20,6 +20,6 @@ module Fantasia::Cell
     # Create a container div with specified classes. Adds .end when passed in.
     def container(&block)
       content_tag(:div, class: classes, &block)
-     end
+    end
   end
 end
