@@ -4,6 +4,8 @@
     .roster
       %h3
         Roster
+        - players.each do |player|
+          #{player.name}
   - else
     = link_to "Set-up your team!", edit_team_path(model), class: "button"
 

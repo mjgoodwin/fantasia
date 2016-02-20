@@ -31,12 +31,27 @@ class Team < ActiveRecord::Base
 
     contract do
       property :name
+      collection :players,
+        prepopulator: :prepopulate_players!,
+        populate_if_empty: :populate_players! do
+        property :id
+      end
 
       validates :name, presence: true
+
+      private
+
+      def prepopulate_players!(options)
+        # (3 - players.size).times { players << Player.new }
+        players << Player.new
+      end
+
+      def populate_players!(fragment:, **)
+        Player.find_by_id(fragment["id"]) || Player.new
+      end
     end
 
     def process(params)
-      # binding.pry
       validate(params[:team]) do |f|
         f.save
       end
