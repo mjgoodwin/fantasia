@@ -49,11 +49,15 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     page.must_have_css ".error"
 
     fill_in "Name", with: "Mighty Ducks"
-    select "Bubba Watson", from: "Player 1"
+    select "Jordan Spieth", from: "Player 1"
+    select "Jason Day", from: "Player 2"
+    select "Bubba Watson", from: "Player 3"
     click_button "Save Team"
 
     page.must_have_css ".roster"
     page.body.must_match /Mighty Ducks/
+    page.body.must_match /Jordan Spieth/
+    page.body.must_match /Jason Day/
     page.body.must_match /Bubba Watson/
   end
 end

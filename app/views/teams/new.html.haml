@@ -2,8 +2,7 @@
   = f.input :name, placeholder: "Name", label: false
   = f.fields_for :players do |p|
     .row
-      INDEX: #{p.index}
-      = p.input :id, label: "Player 1", collection: Player.first(10)
+      = p.input :id, label: "Player #{p.index + 1}", collection: Player.first(10)
 
   = f.button :submit, "Save Team", class: :expand
 

@@ -2,10 +2,9 @@
   - if name.present?
     %h2 #{name}
     .roster
-      %h3
-        Roster
+      %ul
         - players.each do |player|
-          #{player.name}
+          %li #{player.name}
   - else
     = link_to "Set-up your team!", edit_team_path(model), class: "button"
 

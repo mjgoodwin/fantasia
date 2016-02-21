@@ -34,16 +34,18 @@ class Team < ActiveRecord::Base
       collection :players,
         prepopulator: :prepopulate_players!,
         populate_if_empty: :populate_players! do
+
         property :id
+        validates :id, presence: true
       end
 
       validates :name, presence: true
+      validates :players, length: { is: 3 }
 
       private
 
       def prepopulate_players!(options)
-        # (3 - players.size).times { players << Player.new }
-        players << Player.new
+        (3 - players.size).times { players << Player.new }
       end
 
       def populate_players!(fragment:, **)
