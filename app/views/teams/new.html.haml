@@ -1,6 +1,6 @@
 = simple_form_for @form do |f|
   = f.input :name, placeholder: "Name", label: false
-  = f.fields_for :players do |p|
+  = f.fields_for :players, include_id: false do |p|
     .row
       = p.input :id, label: "Player #{p.index + 1}", collection: Player.first(10)
 

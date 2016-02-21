@@ -33,7 +33,7 @@ class Team < ActiveRecord::Base
       property :name
       collection :players,
         prepopulator: :prepopulate_players!,
-        populate_if_empty: :populate_players! do
+        populator: :populate_player! do
 
         property :id
         validates :id, presence: true
@@ -48,8 +48,10 @@ class Team < ActiveRecord::Base
         (3 - players.size).times { players << Player.new }
       end
 
-      def populate_players!(fragment:, **)
-        Player.find_by_id(fragment["id"]) || Player.new
+      def populate_player!(collection:, index:, fragment:, **)
+        player = Player.find_by_id(fragment["id"]) || Player.new
+        collection.delete(collection[index])
+        collection.insert(index, player)
       end
     end
 

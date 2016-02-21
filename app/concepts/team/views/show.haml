@@ -1,6 +1,7 @@
 - if policy.(:edit?)
   - if name.present?
     %h2 #{name}
+    = link_to "Edit", edit_team_path(model)
     .roster
       %ul
         - players.each do |player|
