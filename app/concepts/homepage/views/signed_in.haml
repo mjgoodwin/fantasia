@@ -9,5 +9,6 @@
         .column
           .callout
             = link_to league_path(league) do
-              #{league.name}
+              .league_name
+                #{league.name}
               = image_tag "/assets/logos/mickey_01.svg", size: "300"
