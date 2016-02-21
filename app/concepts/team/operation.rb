@@ -12,7 +12,15 @@ class Team < ActiveRecord::Base
       collection :owners
 
       validates :league, presence: true
-      validates :owners, length: { maximum: 2 }
+      validates :owners, length: { in: 1..2 }
+      validate :owners_unique?
+
+      private
+
+      def owners_unique?
+        return if owners.size == owners.uniq.size
+        errors.add("owners", "Owners must be uniqe.")
+      end
     end
 
     def process(params)
@@ -32,9 +40,8 @@ class Team < ActiveRecord::Base
     contract do
       property :name
       collection :players,
-        prepopulator: :prepopulate_players!,
-        populator: :populate_player! do
-
+                 prepopulator: :prepopulate_players!,
+                 populator: :populate_player! do
         property :id
         validates :id, presence: true
       end

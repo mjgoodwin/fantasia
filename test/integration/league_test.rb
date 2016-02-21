@@ -56,9 +56,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
 
     page.must_have_css ".roster"
     page.body.must_match /Mighty Ducks/
-    page.body.must_match /Jordan Spieth/
     page.body.must_match /Jason Day/
-    page.body.must_match /Bubba Watson/
 
     click_link "Edit"
     fill_in "Name", with: "Mighty Ducks 2"
