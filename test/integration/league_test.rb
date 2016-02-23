@@ -64,6 +64,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     click_button "Save Team"
 
     page.body.must_match /Mighty Ducks 2/
+    page.body.wont_match /Jason Day/
     page.body.must_match /Dustin Johnson/
   end
 end

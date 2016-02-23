@@ -19,7 +19,7 @@ class Team < ActiveRecord::Base
 
       def owners_unique?
         return if owners.size == owners.uniq.size
-        errors.add("owners", "Owners must be uniqe.")
+        errors.add("owners", "Owners must be unique.")
       end
     end
 
@@ -42,12 +42,14 @@ class Team < ActiveRecord::Base
       collection :players,
                  prepopulator: :prepopulate_players!,
                  populator: :populate_player! do
+
         property :id
         validates :id, presence: true
       end
 
       validates :name, presence: true
       validates :players, length: { is: 3 }
+      validate :valid_roster?
 
       private
 
@@ -59,6 +61,11 @@ class Team < ActiveRecord::Base
         player = Player.find_by_id(fragment["id"]) || Player.new
         collection.delete(collection[index])
         collection.insert(index, player)
+      end
+
+      def valid_roster?
+        return if players.map(&:model).size == players.map(&:model).uniq.size
+        errors.add("players", "Players must be unique.")
       end
     end
 
