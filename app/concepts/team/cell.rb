@@ -1,3 +1,4 @@
+
 class Team::Cell < ::Cell::Concept
   property :name
   property :owners
@@ -11,5 +12,9 @@ class Team::Cell < ::Cell::Concept
 
   def policy
     @policy ||= Team::Policy.new(params[:current_user], model)
+  end
+
+  def initialized?
+    name.present?
   end
 end

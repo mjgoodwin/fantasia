@@ -1,5 +1,5 @@
 - if policy.(:edit?)
-  - if name.present?
+  - if initialized?
     %h2 #{name}
     = link_to "Edit", edit_team_path(model)
     .roster
