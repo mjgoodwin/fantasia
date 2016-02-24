@@ -16,7 +16,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     # show
     page.current_path.must_equal league_path(League.last)
     page.body.must_match /Mickey Mouse League/
-    page.body.must_match /mike@example.com\s\(Commissioner\)/
+    page.body.must_match /mike@example.com\s+\(Commissioner\)/
 
     # league listing
     visit "/"

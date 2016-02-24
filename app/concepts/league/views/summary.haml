@@ -1,0 +1,19 @@
+.header
+  %h1
+    #{name}
+    - if policy.(:edit?)
+      = link_to "Edit", edit_league_path(@model)
+    - if policy.(:join?)
+      = link_to "Join", join_league_path(@model)
+    -# - if @operation.policy.(:delete?)
+    -#   = link_to "Delete", league_path(@model), method: :delete
+
+%table.teams
+  - teams.each do |team|
+    %tr{class: ("my-team" if team.owners.include?(params[:current_user]))}
+      %td
+        #{team.owners.map(&:email).join}
+        - if team.owners.include? commissioner
+          (Commissioner)
+      %td
+        #{team.name}

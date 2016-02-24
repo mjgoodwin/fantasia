@@ -1,0 +1,7 @@
+- if rosters_locked?
+  - teams.each do |team|
+    - if true#policy(team).(:show?)
+      = concept "team/cell", team
+
+- elsif true#policy(user_team).(:edit?)
+  = concept "team/cell", user_team
