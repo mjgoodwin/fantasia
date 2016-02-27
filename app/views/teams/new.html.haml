@@ -1,9 +1,14 @@
-= simple_form_for @form do |f|
-  = f.input :name, placeholder: "Name", label: false
-  = f.fields_for :players, include_id: false do |p|
-    .row
-      = p.input :id, label: "Player #{p.index + 1}", collection: Player.first(10)
+.row.columns.small-12.medium-6.large-4
+  %h3.text-center Edit Your Team
 
-  = f.button :submit, "Save Team", class: :expand
+  = simple_form_for @form do |f|
+    = f.error_notification message: @form.errors.full_messages.to_sentence
 
-= @form.errors.messages
+    = f.input :name, placeholder: "Name", label: false, error: false
+
+    %fieldset
+      = f.fields_for :players, include_id: false do |p|
+        .row.columns.small-8
+          = p.input :id, label: "Player #{p.index + 1}", collection: Player.first(10), required: false
+
+    = f.button :submit, "Save Team", class: "button"

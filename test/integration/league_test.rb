@@ -7,7 +7,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
 
     # invalid.
     click_button "Create League"
-    page.must_have_css ".error"
+    page.must_have_css ".alert"
 
     # correct submit.
     fill_in 'Name', with: "Mickey Mouse League"
@@ -46,7 +46,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     click_link "Set-up your team!"
 
     click_button "Save Team"
-    page.must_have_css ".error"
+    page.must_have_css ".alert"
 
     fill_in "Name", with: "Mighty Ducks"
     select "Jordan Spieth", from: "Player 1"

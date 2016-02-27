@@ -65,7 +65,7 @@ class Team < ActiveRecord::Base
 
       def valid_roster?
         return if players.map(&:model).size == players.map(&:model).uniq.size
-        errors.add("players", "Players must be unique.")
+        errors.add("players", "must be unique")
       end
     end
 

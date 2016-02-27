@@ -2,9 +2,9 @@
   %h1
     #{name}
     - if policy.(:edit?)
-      = link_to "Edit", edit_league_path(@model)
+      = link_to "Edit League", edit_league_path(@model), class: "button"
     - if policy.(:join?)
-      = link_to "Join", join_league_path(@model)
+      = link_to "Join League", join_league_path(@model), class: "button"
     -# - if @operation.policy.(:delete?)
     -#   = link_to "Delete", league_path(@model), method: :delete
 

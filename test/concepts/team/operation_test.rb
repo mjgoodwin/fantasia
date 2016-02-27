@@ -77,7 +77,7 @@ class TeamOperationTest < MiniTest::Spec
         players: [{"id"=>"1"}, {"id"=>"2"}, {"id"=>"2"}]})
 
       res.must_equal false
-      op.errors.to_s.must_equal "{:players=>[\"Players must be unique.\"]}"
+      op.errors.to_s.must_equal "{:players=>[\"must be unique\"]}"
     end
   end
 end

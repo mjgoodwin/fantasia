@@ -1,13 +1,14 @@
 - if policy.(:edit?)
   - if initialized?
     %h2 #{name}
-    = link_to "Edit", edit_team_path(model)
     .roster
       %ul
         - players.each do |player|
           %li #{player.name}
+
+    = link_to "Edit Team", edit_team_path(model), class: "button"
   - else
     = link_to "Set-up your team!", edit_team_path(model), class: "button"
 
 - elsif policy.(:show?)
-  Visitor view????
+  - #

@@ -1,11 +1,12 @@
-- if @model.persisted?
-  %h3 Edit League
-- else
-  %h3 Start A League
+.row.columns.small-12.medium-6.large-4
+  - if @model.persisted?
+    %h3.text-center Edit League
+  - else
+    %h3.text-center Start A League
 
-= simple_form_for @form do |f|
-  = f.input :name, placeholder: "Name", label: false#, readonly: @form.readonly?(:name)
+  = simple_form_for @form do |f|
+    = f.error_notification message: @form.errors.full_messages.to_sentence
 
-  = f.button :submit, class: :expand
+    = f.input :name, placeholder: "Name", label: false, error: false
 
-= @form.errors.messages
+    = f.button :submit, class: "button"
