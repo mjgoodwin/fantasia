@@ -1,0 +1,19 @@
+.callout.large
+  .row.column.text-center
+    - if @leagues.none?
+      %h3 You haven't joined any leagues yet
+
+      = link_to "Browse Leagues", "/", class: "button"
+
+    - else
+      %h1
+        My Leagues
+
+      .row.small-up-1.medium-up-2.large-up-3
+        - @leagues.each do |league|
+          .column
+            .callout
+              = link_to league_path(league) do
+                .league_name
+                  #{league.name}
+                = image_tag "/assets/logos/mickey_01.svg", size: "300"

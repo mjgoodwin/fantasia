@@ -67,4 +67,21 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     page.body.wont_match /Jason Day/
     page.body.must_match /Dustin Johnson/
   end
+
+  it "index" do
+    commissioner = User::Create.(user: {email: "mike@example.com"}).model
+    League::Create.(league: { name: "Mickey Mouse League", commissioner: commissioner }).model
+
+    sign_in!("dave@example.com")
+    click_link "My Leagues"
+
+    page.must_have_content "You haven't joined any leagues yet"
+
+    click_link "Browse Leagues"
+    click_link "Mickey Mouse League"
+    click_link "Join League"
+    click_link "My Leagues"
+
+    page.must_have_content "Mickey Mouse League"
+  end
 end
