@@ -60,6 +60,11 @@ form.admin {
   padding: 9px;
 }
 
+.fi-alert::before {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
 /*.field_with_errors input:not(:focus) {
   background-color: rgba(236, 88, 64, 0.1);
   border-color: #ec5840;
