@@ -39,6 +39,13 @@ module Session
   class SignUp < Tyrant::SignUp::Confirmed
     contract do
       validates :email, email: true, unique: true
+
+      private
+
+      def password_ok?
+        return unless confirm_password.present?
+        super
+      end
     end
   end
 end

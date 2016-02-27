@@ -2,10 +2,13 @@
 
 = simple_form_for(@form, url: sessions_sign_up_path) do |f|
   .row.medium-4.small-10
+    = f.error_notification
+
+  .row.medium-4.small-10
     = f.input :email, placeholder: "Email", label: false
   .row.medium-4.small-10
     = f.input :password, placeholder: "Password", label: false
   .row.medium-4.small-10
     = f.input :confirm_password, placeholder: "Password, again", label: false
   .row.medium-4.small-10
-    = f.button :submit, "Sign up!", class: :expand
+    = f.button :submit, "Sign up!"
