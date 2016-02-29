@@ -9,4 +9,8 @@
 
     = f.input :name, placeholder: "Name", label: false, error: false
 
+    %fieldset
+      = f.fields_for :rounds do |r|
+        = r.datetime_select :start_time, error: false
+
     = f.button :submit

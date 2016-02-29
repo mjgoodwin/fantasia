@@ -9,13 +9,41 @@ class League < ActiveRecord::Base
     contract do
       property :name
       property :commissioner
+      collection :rounds,
+                 prepopulator: :prepopulate_rounds!,
+                 populate_if_empty: :populate_rounds! do
+
+        property :start_time
+      end
 
       validates :name, presence: true
       validates :commissioner, presence: true
+
+      private
+
+      def prepopulate_rounds!(options)
+        (1).times { rounds << Round.new }
+      end
+
+      def populate_rounds!(fragment:, **)
+        Round.new
+      end
     end
 
     def process(params)
       params[:league][:commissioner] ||= params[:current_user]
+
+      if params[:league][:rounds_attributes].present?
+        params[:league][:rounds_attributes].each do |_, round_attributes|
+          round_attributes[:start_time] = DateTime.new(
+            round_attributes["start_time(1i)"].to_i,
+            round_attributes["start_time(2i)"].to_i,
+            round_attributes["start_time(3i)"].to_i,
+            round_attributes["start_time(4i)"].to_i,
+            round_attributes["start_time(5i)"].to_i
+          )
+        end
+      end
 
       validate(params[:league]) do |f|
         f.save
