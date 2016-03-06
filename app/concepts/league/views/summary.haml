@@ -8,6 +8,9 @@
     -# - if @operation.policy.(:delete?)
     -#   = link_to "Delete", league_path(@model), method: :delete
 
+  %h3
+    Starts: #{start_time}
+
 %table.teams
   - teams.each do |team|
     %tr{class: ("my-team" if team.owners.include?(params[:current_user]))}

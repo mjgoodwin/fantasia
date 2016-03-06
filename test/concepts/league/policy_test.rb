@@ -1,8 +1,10 @@
 require "test_helper"
 
 class LeaguePolicyTest < MiniTest::Spec
+  include LeagueSetupHelper
+
   let (:commissioner) { User::Create.(user: { email: "mike@example.com" }).model }
-  let (:league) { League::Create.(league: { name: "Mickey Mouse League", commissioner: commissioner }).model }
+  let (:league) { create_league!(commissioner: commissioner) }
 
   let (:policy) { League::Update.policy_config.(user, league) }
 
@@ -34,7 +36,7 @@ class LeaguePolicyTest < MiniTest::Spec
 
         # is commissioner
         it do
-          league  = League::Create.(league: { name: "Donald Duck League", commissioner: admin }).model
+          league = create_league!(name: "Donald Duck League", commissioner: admin)
           policy = League::Update.policy_config.(admin, league)
 
           policy.update?.must_equal true

@@ -1,9 +1,11 @@
 require "test_helper"
 
 class TeamOperationTest < MiniTest::Spec
+  include LeagueSetupHelper
+
   let(:owner) { User::Create.(user: {email: "dave@example.com"}).model }
   let(:commissioner) { User::Create.(user: {email: "mike@example.com"}).model }
-  let(:league) { League::Create.(league: { name: "Mickey Mouse League", commissioner: commissioner }).model }
+  let(:league) { create_league!(commissioner: commissioner) }
 
   describe "Team::Create" do
     it "persists valid" do

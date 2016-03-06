@@ -11,11 +11,12 @@ class League < ActiveRecord::Base
       property :commissioner
       collection :rounds,
                  prepopulator: :prepopulate_rounds!,
-                 populate_if_empty: :populate_rounds! do
+                 populate_if_empty: :populate_round! do
 
         property :start_time
       end
 
+      validate :start_time_valid?
       validates :name, presence: true
       validates :commissioner, presence: true
 
@@ -25,8 +26,14 @@ class League < ActiveRecord::Base
         (1 - rounds.size).times { rounds << Round.new }
       end
 
-      def populate_rounds!(fragment:, **)
-        Round.new
+      def populate_round!(fragment:, **)
+        Round.new(start_time: fragment[:start_time])
+      end
+
+      def start_time_valid?
+        if rounds.first.nil? || rounds.first.start_time.blank?
+          errors.add(:start_time, "can't be blank")
+        end
       end
     end
 

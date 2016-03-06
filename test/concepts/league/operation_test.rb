@@ -5,7 +5,7 @@ class LeagueOperationTest < MiniTest::Spec
 
   describe "League::Create" do
     it "persists valid" do
-      league = League::Create.(league: { name: "Mickey Mouse League", commissioner: user }).model
+      league = League::Create.(league: { name: "Mickey Mouse League", commissioner: user, rounds: [{ start_time: Time.now.end_of_day }] }).model
 
       league.persisted?.must_equal true
       league.name.must_equal "Mickey Mouse League"
@@ -13,23 +13,30 @@ class LeagueOperationTest < MiniTest::Spec
     end
 
     it "creates commissioner's team" do
-      league = League::Create.(league: { name: "Mickey Mouse League", commissioner: user }).model
+      league = League::Create.(league: { name: "Mickey Mouse League", commissioner: user, rounds: [{ start_time: Time.now.end_of_day }] }).model
 
       league.teams.size.must_equal 1
     end
 
     it "invalid - no name" do
-      res, op = League::Create.run(league: { commissioner: user })
+      res, op = League::Create.run(league: { commissioner: user, rounds: [{ start_time: Time.now.end_of_day }] })
 
       res.must_equal false
       op.errors.to_s.must_equal "{:name=>[\"can't be blank\"]}"
     end
 
     it "invalid - no commissioner" do
-      res, op = League::Create.run(league: { name: "Mickey Mouse League" })
+      res, op = League::Create.run(league: { name: "Mickey Mouse League", rounds: [{ start_time: Time.now.end_of_day }] })
 
       res.must_equal false
       op.errors.to_s.must_equal "{:commissioner=>[\"can't be blank\"]}"
+    end
+
+    it "invalid - no start time" do
+      res, op = League::Create.run(league: { name: "Mickey Mouse League", commissioner: user })
+
+      res.must_equal false
+      op.errors.to_s.must_equal "{:start_time=>[\"can't be blank\"]}"
     end
   end
 end

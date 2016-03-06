@@ -1,7 +1,11 @@
 require 'test_helper'
 
 class LeagueIntegrationTest < Trailblazer::Test::Integration
+  include LeagueSetupHelper
+
   it "commissioner flow" do
+    start_time = Time.zone.local(2016, 2, 29, 19, 30)
+
     sign_in!("mike@example.com")
     click_link "Create League"
 
@@ -11,11 +15,13 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
 
     # correct submit.
     fill_in 'Name', with: "Mickey Mouse League"
+    fill_in 'Start Time', with: start_time.strftime("%Y/%m/%d %H:%M")
     click_button "Create League"
 
     # show
     page.current_path.must_equal league_path(League.last)
     page.body.must_match /Mickey Mouse League/
+    page.body.must_match /Starts: February 29, 7:30 PM/
     page.body.must_match /mike@example.com\s+\(Commissioner\)/
 
     # league listing
@@ -31,8 +37,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
   end
 
   it "non-commissioner flow" do
-    commissioner = User::Create.(user: {email: "mike@example.com"}).model
-    League::Create.(league: { name: "Mickey Mouse League", commissioner: commissioner }).model
+    create_league!
 
     sign_in!("dave@example.com")
     click_link "Mickey Mouse League"
@@ -69,8 +74,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
   end
 
   it "index" do
-    commissioner = User::Create.(user: {email: "mike@example.com"}).model
-    League::Create.(league: { name: "Mickey Mouse League", commissioner: commissioner }).model
+    create_league!
 
     sign_in!("dave@example.com")
     click_link "My Leagues"

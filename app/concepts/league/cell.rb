@@ -2,7 +2,6 @@ class League::Cell < ::Cell::Concept
   property :name
   property :teams
   property :commissioner
-  property :start_at
 
   class Summary < League::Cell
     def show
@@ -17,6 +16,10 @@ class League::Cell < ::Cell::Concept
 
     def operation
       options.fetch :update_operation
+    end
+
+    def start_time
+      model.rounds.first.start_time.strftime("%B %d, %-l:%M %p")
     end
   end
 
