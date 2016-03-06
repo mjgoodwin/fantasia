@@ -11,6 +11,13 @@
 
     %fieldset
       = f.fields_for :rounds do |r|
-        = r.datetime_select :start_time, error: false
+        = r.input :start_time, type: :text, error: false, required: false, label: "Start Time", input_html: { class: "datetime_input", value: localize(r.object.start_time, format: "%Y/%m/%d %H:%M") }
 
     = f.button :submit
+
+:coffeescript
+  $ ->
+    $('.datetime_input').datetimepicker(
+      format: 'Y/m/d H:i',
+      validateOnBlur: false
+    )

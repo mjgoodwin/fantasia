@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+//= require jquery.datetimepicker.full.min
 //= require_tree .
 //= require rails-timeago
 

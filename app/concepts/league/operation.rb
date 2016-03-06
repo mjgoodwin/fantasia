@@ -33,18 +33,6 @@ class League < ActiveRecord::Base
     def process(params)
       params[:league][:commissioner] ||= params[:current_user]
 
-      if params[:league][:rounds_attributes].present?
-        params[:league][:rounds_attributes].each do |_, round_attributes|
-          round_attributes[:start_time] = DateTime.new(
-            round_attributes["start_time(1i)"].to_i,
-            round_attributes["start_time(2i)"].to_i,
-            round_attributes["start_time(3i)"].to_i,
-            round_attributes["start_time(4i)"].to_i,
-            round_attributes["start_time(5i)"].to_i
-          )
-        end
-      end
-
       validate(params[:league]) do |f|
         f.save
         League::Join.(id: f.model.id, owner: f.model.commissioner)
@@ -88,18 +76,6 @@ class League < ActiveRecord::Base
     action :update
 
     def process(params)
-      if params[:league][:rounds_attributes].present?
-        params[:league][:rounds_attributes].each do |_, round_attributes|
-          round_attributes[:start_time] = DateTime.new(
-            round_attributes["start_time(1i)"].to_i,
-            round_attributes["start_time(2i)"].to_i,
-            round_attributes["start_time(3i)"].to_i,
-            round_attributes["start_time(4i)"].to_i,
-            round_attributes["start_time(5i)"].to_i
-          )
-        end
-      end
-
       validate(params[:league]) do |f|
         f.save
       end
