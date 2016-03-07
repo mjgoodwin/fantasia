@@ -34,12 +34,12 @@ class League::Cell < ::Cell::Concept
       model.team_for(params[:current_user])
     end
 
-    def rosters_locked?
-      true
-    end
-
     def policy(team)
       Team::Policy.new(params[:current_user], team)
+    end
+
+    def round
+      rounds.first
     end
   end
 end

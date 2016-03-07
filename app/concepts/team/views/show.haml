@@ -10,5 +10,9 @@
   - else
     = link_to "Set-up your team!", edit_team_path(model), class: "button"
 
-- elsif policy.(:show?)
-  - #
+- elsif policy.(:show?) && initialized?
+  %h2 #{name}
+  .roster
+    %ul
+      - players.each do |player|
+        %li #{player.name}
