@@ -23,6 +23,7 @@ class League < ActiveRecord::Base
       private
 
       def prepopulate_rounds!(options)
+        rounds.each { |round| round.start_time = round.start_time.strftime("%Y/%m/%d %H:%M") }
         (1 - rounds.size).times { rounds << Round.new }
       end
 

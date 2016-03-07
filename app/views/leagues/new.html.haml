@@ -11,13 +11,8 @@
 
     %fieldset
       = f.fields_for :rounds do |r|
-        = r.input :start_time, type: :datetime, error: false, required: false, label: "Start Time", input_html: { class: "datetime_input", value: r.object.start_time.try(:to_time).try(:strftime, "%Y/%m/%d %H:%M") }
+        = r.input :start_time, type: :datetime, label: "Start Time",
+                               error: false, required: false,
+                               input_html: { class: "datetime_input" }
 
     = f.button :submit
-
-:coffeescript
-  $ ->
-    $('.datetime_input').datetimepicker(
-      format: 'Y/m/d H:i',
-      validateOnBlur: false
-    )
