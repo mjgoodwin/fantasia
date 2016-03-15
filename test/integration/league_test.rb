@@ -4,7 +4,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
   include LeagueSetupHelper
 
   it "commissioner flow" do
-    start_time = Time.zone.local(2016, 2, 29, 19, 30)
+    start_time = Time.zone.local(Date.today.year + 1, 2, 28, 19, 30)
 
     sign_in!("mike@example.com")
     click_link "Create League"
@@ -21,7 +21,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     # show
     page.current_path.must_equal league_path(League.last)
     page.body.must_match /Mickey Mouse League/
-    page.body.must_match /Starts: February 29, 7:30 PM/
+    page.body.must_match /Starts: February 28, 7:30 PM/
     page.body.must_match /mike@example.com\s+\(Commissioner\)/
 
     # league listing

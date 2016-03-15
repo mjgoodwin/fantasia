@@ -13,12 +13,16 @@ class League < ActiveRecord::Base
                  prepopulator: :prepopulate_rounds!,
                  populate_if_empty: :populate_round! do
 
-        property :start_time
+        property :start_time, writeable: :start_time_writeable?
       end
 
       validate :start_time_valid?
       validates :name, presence: true
       validates :commissioner, presence: true
+
+      def start_time_writeable?
+        model.rounds.first.nil? || model.rounds.first.start_time > Time.zone.now
+      end
 
       private
 
@@ -32,9 +36,10 @@ class League < ActiveRecord::Base
       end
 
       def start_time_valid?
+        return unless start_time_writeable?
         if rounds.first.nil? || rounds.first.start_time.blank?
           errors.add(:start_time, "can't be blank")
-        elsif rounds.first.start_time < Time.zone.now
+        elsif rounds.first.start_time.to_time < Time.zone.now
           errors.add(:start_time, "can't be in the past")
         end
       end

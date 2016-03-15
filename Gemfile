@@ -34,6 +34,7 @@ group :test do
   gem "fivemat"
   gem "database_cleaner"
   gem "codecov", require: false
+  gem "timecop"
 end
 
 group :development, :test do
