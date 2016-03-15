@@ -34,6 +34,8 @@ class League < ActiveRecord::Base
       def start_time_valid?
         if rounds.first.nil? || rounds.first.start_time.blank?
           errors.add(:start_time, "can't be blank")
+        elsif rounds.first.start_time < Time.zone.now
+          errors.add(:start_time, "can't be in the past")
         end
       end
     end

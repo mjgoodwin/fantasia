@@ -38,5 +38,12 @@ class LeagueOperationTest < MiniTest::Spec
       res.must_equal false
       op.errors.to_s.must_equal "{:start_time=>[\"can't be blank\"]}"
     end
+
+    it "invalid - start time in the past" do
+      res, op = league = League::Create.run(league: { name: "Mickey Mouse League", commissioner: user, rounds: [{ start_time: 1.second.ago }] })
+
+      res.must_equal false
+      op.errors.to_s.must_equal "{:start_time=>[\"can't be in the past\"]}"
+    end
   end
 end
