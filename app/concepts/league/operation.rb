@@ -16,9 +16,16 @@ class League < ActiveRecord::Base
         property :start_time, writeable: :start_time_writeable?
       end
 
-      validate :start_time_valid?
+      property :sport, populator: :populate_sport!
+
+      def populate_sport!(fragment:, **)
+        self.sport = Sport.find(fragment[:id])
+      end
+
       validates :name, presence: true
       validates :commissioner, presence: true
+      validates :sport, presence: true
+      validate :start_time_valid?
 
       def start_time_writeable?
         model.rounds.first.nil? || model.rounds.first.start_time > Time.zone.now

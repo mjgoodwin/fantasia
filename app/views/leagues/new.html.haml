@@ -10,6 +10,10 @@
     = f.input :name, placeholder: "Name", label: false, error: false
 
     %fieldset
+      = f.fields_for :sport do |s|
+        = s.input :id, collection: Sport.all, required: false, error: false, include_blank: false, label: "Sport"
+
+    %fieldset
       = f.fields_for :rounds do |r|
         = r.input :start_time, type: :datetime, label: "Start Time",
                                error: false, required: false,

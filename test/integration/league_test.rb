@@ -15,6 +15,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
 
     # correct submit.
     fill_in 'Name', with: "Mickey Mouse League"
+    select "Golf", from: "Sport"
     fill_in 'Start Time', with: start_time.strftime("%Y/%m/%d %H:%M")
     click_button "Create League"
 

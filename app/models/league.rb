@@ -1,5 +1,6 @@
 class League < ActiveRecord::Base
   belongs_to :commissioner, class_name: User
+  belongs_to :sport
   has_many :teams
   has_many :rounds
 
