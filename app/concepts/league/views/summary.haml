@@ -3,13 +3,15 @@
     #{name}
     - if policy.(:edit?)
       = link_to "Edit League", edit_league_path(@model), class: "button"
+    - if policy.(:input_scores?)
+      = link_to "Input Scores", edit_league_path(@model), class: "button"
     - if policy.(:join?)
       = link_to "Join League", join_league_path(@model), class: "button"
     -# - if @operation.policy.(:delete?)
     -#   = link_to "Delete", league_path(@model), method: :delete
 
   %h3
-    Starts: #{start_time}
+    Start Time: #{start_time}
 
 %table.teams
   - teams.each do |team|
