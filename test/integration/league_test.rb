@@ -6,7 +6,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
   it "commissioner flow" do
     start_time = Time.new(2016, 2, 28, 19, 30)
 
-    Timecop.freeze(start_time - 1.day) do
+    Timecop.travel(start_time - 1.day) do
       sign_in!("mike@example.com")
       click_link "Create League"
 
@@ -48,7 +48,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     end
 
     # inputting scores
-    Timecop.freeze(start_time + 1.minute) do
+    Timecop.travel(start_time + 1.second) do
       visit current_path
       click_link "Input Scores"
     end
