@@ -59,7 +59,7 @@ class LeagueOperationTest < MiniTest::Spec
     let(:league) { League::Create.(league: { name: "Mickey Mouse League", commissioner: user, rounds: [{ start_time: Time.zone.now.end_of_day }], sport: { id: sport.id} }).model }
 
     it "persists valid" do
-      new_start_time = league.rounds.first.start_time + 1.day
+      new_start_time = league.start_time + 1.day
       res, op = League::Update.run(current_user: league.commissioner, id: league.id, league: { rounds: [{ start_time: new_start_time }] })
 
       res.must_equal true
@@ -68,7 +68,7 @@ class LeagueOperationTest < MiniTest::Spec
 
     it "valid - change name after start time has past" do
       # time travel to after league has started
-      Timecop.freeze(league.rounds.first.start_time + 1.day) do
+      Timecop.freeze(league.start_time + 1.day) do
         res, op = League::Update.run(current_user: league.commissioner, id: league.id, league: { name: "Donald Duck League" })
 
         res.must_equal true
@@ -78,7 +78,7 @@ class LeagueOperationTest < MiniTest::Spec
 
     it "invalid - start time in the past" do
       # time travel to before league has started
-      Timecop.freeze(league.rounds.first.start_time - 1.day) do
+      Timecop.freeze(league.start_time - 1.day) do
         new_start_time = 1.second.ago
         res, op = League::Update.run(current_user: league.commissioner, id: league.id, league: { rounds: [{ start_time: new_start_time }] })
 

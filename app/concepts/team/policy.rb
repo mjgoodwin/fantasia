@@ -32,6 +32,6 @@ class Team::Policy
   end
 
   def roster_locked?
-    model.league.rounds.first.start_time < Time.zone.now
+    model.league.start_time < Time.zone.now
   end
 end

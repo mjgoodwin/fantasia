@@ -19,7 +19,7 @@ class League::Cell < ::Cell::Concept
     end
 
     def start_time
-      model.rounds.first.start_time.strftime("%B %d, %-l:%M %p")
+      model.start_time.strftime("%B %d, %-l:%M %p")
     end
   end
 

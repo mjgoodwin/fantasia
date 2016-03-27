@@ -48,17 +48,35 @@ class LeaguePolicyTest < MiniTest::Spec
           policy.update?.must_equal true
         end
       end
+    end
+  end
 
-      describe "#join?" do
-        let (:user) { User::Create.(user: {email: "dave@example.com"}).model }
+  describe "#join?" do
+    let (:user) { User::Create.(user: {email: "dave@example.com"}).model }
 
-        it "non-members can join" do
-          policy.join?.must_equal true
+    it "non-members can join" do
+      policy.join?.must_equal true
+    end
+
+    it "members can't join" do
+      Team::Create.(team: { league: league, owners: [user] })
+      policy.join?.must_equal false
+    end
+  end
+
+  describe "#input_scores?" do
+    describe "commissioner" do
+      let(:policy) { League::Update.policy_config.(commissioner, league) }
+
+      it "cannot input scores before league has started" do
+        Timecop.freeze(league.start_time - 1.minute) do
+          policy.input_scores?.must_equal false
         end
+      end
 
-        it "members can't join" do
-          Team::Create.(team: { league: league, owners: [user] })
-          policy.join?.must_equal false
+      it "can input scores after league has started" do
+        Timecop.freeze(league.start_time + 1.minute) do
+          policy.input_scores?.must_equal true
         end
       end
     end

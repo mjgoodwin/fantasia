@@ -24,4 +24,8 @@ class League::Policy
   def join?
     user.leagues.exclude? model
   end
+
+  def input_scores?
+    edit? && model.start_time < Time.zone.now
+  end
 end
