@@ -48,7 +48,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     end
 
     # inputting scores
-    Timecop.freeze(start_time + 1.second) do
+    Timecop.freeze(start_time + 1.minute) do
       visit current_path
       click_link "Input Scores"
     end
