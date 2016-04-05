@@ -39,7 +39,8 @@ class League < ActiveRecord::Base
       end
 
       def populate_round!(fragment:, **)
-        Round.new(start_time: fragment[:start_time])
+        game = Game.new(start_time: fragment[:start_time], sport_id: 1) # Game is not that useful a concept yet
+        Round.new(start_time: fragment[:start_time], games: [game])
       end
 
       def start_time_valid?

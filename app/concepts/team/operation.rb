@@ -39,33 +39,34 @@ class Team < ActiveRecord::Base
 
     contract do
       property :name
-      collection :players,
-                 prepopulator: :prepopulate_players!,
-                 populator: :populate_player! do
+      collection :memberships,
+                 prepopulator: :prepopulate_memberships!,
+                 populator: :populate_membership! do
 
-        property :id
-        validates :id, presence: true
+        property :player_id
+        validates :player_id, presence: { message: "Player is missing" }
       end
 
-      validates :name, presence: true
-      validates :players, length: { is: 3 }
+      validates :name, presence: { message: "Name can't be blank" }
+      validates :memberships, length: { is: 3 }
       validate :valid_roster?
 
       private
 
-      def prepopulate_players!(options)
-        (3 - players.size).times { players << Player.new }
+      def prepopulate_memberships!(options)
+        (3 - memberships.size).times { memberships << Membership.new }
       end
 
-      def populate_player!(collection:, index:, fragment:, **)
-        player = Player.find_by_id(fragment["id"]) || Player.new
+      def populate_membership!(collection:, index:, fragment:, **)
+        membership = Membership.find_by_id(fragment["id"]) || Membership.new
+        membership.round = model.league.first_round
         collection.delete(collection[index])
-        collection.insert(index, player)
+        collection.insert(index, membership)
       end
 
       def valid_roster?
-        return if players.map(&:model).size == players.map(&:model).uniq.size
-        errors.add("players", "must be unique")
+        return if memberships.map(&:player_id).size == memberships.map(&:player_id).uniq.size
+        errors.add("memberships", "Players must be unique")
       end
     end
 

@@ -2,13 +2,13 @@
   %h3.text-center Edit Your Team
 
   = simple_form_for @form do |f|
-    = f.error_notification message: @form.errors.full_messages.to_sentence
+    = f.error_notification message: @form.errors.messages.values.flatten.to_sentence
 
     = f.input :name, placeholder: "Name", label: false, error: false
 
     %fieldset
-      = f.fields_for :players, include_id: false do |p|
+      = f.fields_for :memberships, include_id: false do |p|
         .row.columns.small-8
-          = p.input :id, label: "Player #{p.index + 1}", collection: Player.first(10), required: false
+          = p.input :player_id, label: "Player #{p.index + 1}", collection: Player.first(10), required: false
 
     = f.button :submit, "Save Team"

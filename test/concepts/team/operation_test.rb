@@ -50,7 +50,7 @@ class TeamOperationTest < MiniTest::Spec
     it "persists valid" do
       model = Team::Update.(current_user: commissioner, id: team.id, team: {
         name: "Mighty Ducks",
-        players: [{"id"=>"1"}, {"id"=>"2"}, {"id"=>"3"}]}).model
+        memberships: [{"player_id"=>"1"}, {"player_id"=>"2"}, {"player_id"=>"3"}]}).model
 
       model.name.must_equal "Mighty Ducks"
       model.players.size.must_equal 3
@@ -58,28 +58,28 @@ class TeamOperationTest < MiniTest::Spec
 
     it "invalid - no name" do
       res, op = Team::Update.run(current_user: commissioner, id: team.id, team: {
-        players: [{"id"=>"1"}, {"id"=>"2"}, {"id"=>"3"}]})
+        memberships: [{"player_id"=>"1"}, {"player_id"=>"2"}, {"player_id"=>"3"}]})
 
       res.must_equal false
-      op.errors.to_s.must_equal "{:name=>[\"can't be blank\"]}"
+      op.errors.to_s.must_equal "{:name=>[\"Name can't be blank\"]}"
     end
 
     it "invalid - wrong number of players" do
       res, op = Team::Update.run(current_user: commissioner, id: team.id, team: {
         name: "Mighty Ducks",
-        players: [{"id"=>"1"}, {"id"=>"2"}]})
+        memberships: [{"player_id"=>"1"}, {"player_id"=>"2"}]})
 
       res.must_equal false
-      op.errors.to_s.must_equal "{:players=>[\"is the wrong length (should be 3 characters)\"]}"
+      op.errors.to_s.must_equal "{:memberships=>[\"is the wrong length (should be 3 characters)\"]}"
     end
 
     it "invalid - duplicate player" do
       res, op = Team::Update.run(current_user: commissioner, id: team.id, team: {
         name: "Mighty Ducks",
-        players: [{"id"=>"1"}, {"id"=>"2"}, {"id"=>"2"}]})
+        memberships: [{"player_id"=>"1"}, {"player_id"=>"2"}, {"player_id"=>"2"}]})
 
       res.must_equal false
-      op.errors.to_s.must_equal "{:players=>[\"must be unique\"]}"
+      op.errors.to_s.must_equal "{:memberships=>[\"Players must be unique\"]}"
     end
   end
 end
