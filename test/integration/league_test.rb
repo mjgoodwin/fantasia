@@ -2,11 +2,12 @@ require 'test_helper'
 
 class LeagueIntegrationTest < Trailblazer::Test::Integration
   include LeagueSetupHelper
+  include ActiveSupport::Testing::TimeHelpers
 
   it "commissioner flow" do
     start_time = Time.new(2016, 2, 28, 19, 30).change(nsec: 0)
 
-    Timecop.travel(start_time - 1.day) do
+    travel_to(start_time - 1.day) do
       sign_in!("mike@example.com")
       click_link "Create League"
 
@@ -48,7 +49,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     end
 
     # inputting scores
-    Timecop.travel(start_time + 1.minute) do
+    travel_to(start_time + 1.minute) do
       visit current_path
       click_link "Input Scores"
     end
