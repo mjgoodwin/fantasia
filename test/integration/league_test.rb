@@ -51,6 +51,8 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     # inputting scores
     travel_to(start_time + 1.minute) do
       visit current_path
+      puts League.last.start_time
+      puts Time.zone.now
       click_link "Input Scores"
     end
   end
