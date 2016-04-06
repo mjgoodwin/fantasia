@@ -4,48 +4,46 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
   include LeagueSetupHelper
 
   it "commissioner flow" do
-    start_time = Time.new(2016, 2, 28, 19, 30) + 1.minute
+    start_time = Time.new(Date.today.year + 1, 2, 28, 19, 30)
 
-    Timecop.travel(start_time - 1.day) do
-      sign_in!("mike@example.com")
-      click_link "Create League"
+    sign_in!("mike@example.com")
+    click_link "Create League"
 
-      # invalid.
-      click_button "Create League"
-      page.must_have_css ".alert"
+    # invalid.
+    click_button "Create League"
+    page.must_have_css ".alert"
 
-      # correct submit.
-      fill_in 'Name', with: "Mickey Mouse League"
-      select "Golf", from: "Sport"
-      fill_in 'Start Time', with: start_time.strftime("%Y/%m/%d %H:%M")
-      click_button "Create League"
+    # correct submit.
+    fill_in 'Name', with: "Mickey Mouse League"
+    select "Golf", from: "Sport"
+    fill_in 'Start Time', with: start_time.strftime("%Y/%m/%d %H:%M")
+    click_button "Create League"
 
-      # show
-      page.current_path.must_equal league_path(League.last)
-      page.body.must_match /Mickey Mouse League/
-      page.body.must_match /Start Time: February 28, 7:31 PM/
-      page.body.must_match /mike@example.com\s+\(Commissioner\)/
-      page.wont_have_css "a", text: "Input Scores"
+    # show
+    page.current_path.must_equal league_path(League.last)
+    page.body.must_match /Mickey Mouse League/
+    page.body.must_match /Start Time: February 28, 7:30 PM/
+    page.body.must_match /mike@example.com\s+\(Commissioner\)/
+    page.wont_have_css "a", text: "Input Scores"
 
-      # league listing
-      visit "/"
-      page.body.must_match /Mickey Mouse League/
-      click_link "Mickey Mouse League"
+    # league listing
+    visit "/"
+    page.body.must_match /Mickey Mouse League/
+    click_link "Mickey Mouse League"
 
-      # edit league
-      click_link "Edit League"
-      fill_in 'Name', with: "Donald Duck League"
-      click_button "Update League"
-      page.body.must_match /Donald Duck League/
+    # edit league
+    click_link "Edit League"
+    fill_in 'Name', with: "Donald Duck League"
+    click_button "Update League"
+    page.body.must_match /Donald Duck League/
 
-      # select players
-      click_link "Set-up your team!"
-      fill_in "Name", with: "Mighty Ducks"
-      select "Jordan Spieth", from: "Player 1"
-      select "Jason Day", from: "Player 2"
-      select "Bubba Watson", from: "Player 3"
-      click_button "Save Team"
-    end
+    # select players
+    click_link "Set-up your team!"
+    fill_in "Name", with: "Mighty Ducks"
+    select "Jordan Spieth", from: "Player 1"
+    select "Jason Day", from: "Player 2"
+    select "Bubba Watson", from: "Player 3"
+    click_button "Save Team"
 
     # inputting scores
     Timecop.travel(start_time + 1.second) do
