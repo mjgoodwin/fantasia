@@ -2,12 +2,11 @@ require 'test_helper'
 
 class LeagueIntegrationTest < Trailblazer::Test::Integration
   include LeagueSetupHelper
-  include ActiveSupport::Testing::TimeHelpers
 
   it "commissioner flow" do
-    start_time = Time.new(2016, 2, 28, 19, 30).change(nsec: 0)
+    start_time = Time.new(2016, 2, 28, 19, 30) + 1.minute
 
-    travel_to(start_time - 1.day) do
+    Timecop.travel(start_time - 1.day) do
       sign_in!("mike@example.com")
       click_link "Create League"
 
@@ -24,7 +23,7 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
       # show
       page.current_path.must_equal league_path(League.last)
       page.body.must_match /Mickey Mouse League/
-      page.body.must_match /Start Time: February 28, 7:30 PM/
+      page.body.must_match /Start Time: February 28, 7:31 PM/
       page.body.must_match /mike@example.com\s+\(Commissioner\)/
       page.wont_have_css "a", text: "Input Scores"
 
@@ -49,10 +48,8 @@ class LeagueIntegrationTest < Trailblazer::Test::Integration
     end
 
     # inputting scores
-    travel_to(start_time + 1.minute) do
+    Timecop.travel(start_time + 1.second) do
       visit current_path
-      puts League.last.start_time
-      puts Time.zone.now
       click_link "Input Scores"
     end
   end
